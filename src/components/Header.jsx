@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 function Header() {
   return <p>헤더</p>;
