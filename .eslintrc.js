@@ -22,5 +22,6 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
+    'object-shorthand': 0,
   },
 };
