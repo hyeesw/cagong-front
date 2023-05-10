@@ -3,10 +3,6 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  parser: [
-    '@typescript-eslint', // @typescript-eslint/parser
-    'import', // eslint-plugin-import
-  ],
   plugins: [
     'react', // eslint-plugin-react
     'prettier',
@@ -17,8 +13,8 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react'],
   rules: {
+    'import/prefer-default-export': 0,
     'prettier/prettier': [
       'error',
       {
