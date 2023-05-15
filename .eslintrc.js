@@ -1,0 +1,27 @@
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+  },
+  plugins: [
+    'react', // eslint-plugin-react
+    'prettier',
+  ],
+  extends: ['plugin:react/recommended', 'airbnb', 'prettier'],
+  overrides: [],
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
+  rules: {
+    'import/prefer-default-export': 0,
+    'import/no-extraneous-dependencies': 0,
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
+    'object-shorthand': 0,
+  },
+};
