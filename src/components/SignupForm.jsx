@@ -5,20 +5,17 @@ import axios from 'axios';
 import { API_URL } from '../constants';
 
 function SignupForm() {
-  const [userId] = useState();
-  const [password] = useState();
-  const [phone] = useState();
-  const [email] = useState();
-  const [username] = useState(); // nickname
+  const [userId, setuserId] = useState();
+  const [password, setpassword] = useState();
+  const [phone, setphone] = useState();
+  const [email, setemail] = useState();
+  const [username, setusername] = useState(); // nickname
   // const [type, settype] = useState();
 
-  const [users, setusers] = useState();
-  const getUsers = () => {
-    // e.preventDefault();
+  const get = () => {
     axios
       .get(`${API_URL}signup`)
       .then((res) => {
-        setusers(res.data);
         console.log(res.data);
       })
       .catch((err) => {
@@ -27,12 +24,13 @@ function SignupForm() {
   };
 
   useEffect(() => {
-    getUsers();
+    get();
+    setuserId('useruser');
+    setpassword('useruser');
+    setphone('01011112220');
+    setemail('useruser@user.com');
+    setusername('useruser');
   }, []);
-
-  useEffect(() => {
-    // console.log(users);
-  }, [users]);
 
   // const ex = {
   //   user_id: 'user1',
@@ -42,9 +40,9 @@ function SignupForm() {
   //   type: 'CUSTOMERUSER',
   // };
 
-  const createUser = (e) => {
+  const handleSignupSubmit = async (e) => {
     e.preventDefault();
-    axios
+    await axios
       .post(`${API_URL}signup/`, {
         user_id: userId,
         password: password,
@@ -62,7 +60,7 @@ function SignupForm() {
   };
 
   return (
-    <Form>
+    <Form onSubmit={handleSignupSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" />
@@ -78,8 +76,8 @@ function SignupForm() {
       <Form.Group className="mb-3" controlId="formBasicCheckbox">
         <Form.Check type="checkbox" label="Check me out" />
       </Form.Group>
-      <Button variant="primary" type="submit" onSubmit={createUser}>
-        Submit
+      <Button variant="primary" type="submit">
+        Signup
       </Button>
     </Form>
   );
