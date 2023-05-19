@@ -5,6 +5,8 @@ import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { API_URL } from '../constants';
 
+import { setCookie } from '../util/cookie';
+
 function SigninForm() {
   const [userId, setuserId] = useState();
   const [password, setpassword] = useState();
@@ -36,18 +38,33 @@ function SigninForm() {
 
   const handelSigninSubmit = async (e) => {
     e.preventDefault();
-    await axios
-      .post(`${API_URL}signin/`, {
-        user_id: userId,
-        password: password,
-      })
-      .then((res) => {
-        console.log(res.data);
-        navigate(`/`);
-      })
-      .catch((err) => {
-        console.log(err);
+    try {
+      const response = await axios
+        .post(`${API_URL}signin/`, {
+          user_id: userId,
+          password: password,
+        })
+        .then((res) => {
+          console.log(res.data);
+          return res;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      // access_token : 1시간, refresh_token : 1년
+      await setCookie('access_token', response.data.jwt_token.access_token, {
+        expires: new Date(Date.now() + 1000 * 60 * 60),
       });
+      await setCookie('refresh_token', response.data.jwt_token.refresh_token, {
+        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365),
+      });
+
+      const user = { ...response.data.user };
+      localStorage.setItem('userInfo', JSON.stringify(user));
+      navigate(`/`);
+    } catch {
+      alert('로그인 실패. 입력정보가 올바른지 확인하세요');
+    }
   };
 
   return (

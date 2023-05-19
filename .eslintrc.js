@@ -16,6 +16,7 @@ module.exports = {
   rules: {
     'import/prefer-default-export': 0,
     'import/no-extraneous-dependencies': 0,
+    'no-script-url': 0,
     'prettier/prettier': [
       'error',
       {
