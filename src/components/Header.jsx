@@ -15,17 +15,15 @@ function Header() {
   };
 
   return (
-    <Nav variant="pills" defaultActiveKey="/">
+    <Nav variant="pills" defaultActiveKey="link-0">
       <Nav.Item>
-        <Nav.Link href="/">Home</Nav.Link>
+        <Nav.Link href="/" eventKey="link-0">
+          Home
+        </Nav.Link>
       </Nav.Item>
       {userInfo ? (
         <Nav.Item>
-          <Nav.Link
-            href="javascript:void(0)"
-            eventKey="link-1"
-            onClick={(e) => handleSignoutClick(e)}
-          >
+          <Nav.Link href="#" eventKey="link-1" onClick={(e) => handleSignoutClick(e)}>
             Signout
           </Nav.Link>
         </Nav.Item>
