@@ -3,7 +3,7 @@ import './Point.css';
 import img1 from './assets/point_1000.png';
 import img2 from './assets/point_5000.png';
 import img3 from './assets/point_10000.png';
-import img4 from './assets/pay_nonActive.png';
+import {PointForm} from '../components';
 
 function Point() {
   // const [selectedPoint, setSelectedPoint] = useState(); // 현재 선택된 point
@@ -40,6 +40,8 @@ function Point() {
   // }
 
   return (
+    <>
+    <PointForm/>
     <div>
       <div className="main_content">
         <div className="main_content_header">
@@ -65,14 +67,10 @@ function Point() {
               </div>
             </button>
           </div>
-          <div className="main_content_main_3">
-            <a href="/">
-              <img src={img4} alt="point_img" />
-            </a>
-          </div>
         </div>
       </div>
     </div>
+    </>
   );
 }
 export default Point;
