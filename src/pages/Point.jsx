@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './Point.css';
-import img1 from './assets/point_1000.png';
-import img2 from './assets/point_5000.png';
-import img3 from './assets/point_10000.png';
 import {PointForm} from '../components';
 
 function Point() {
@@ -41,7 +38,7 @@ function Point() {
 
   return (
     <>
-    <PointForm/>
+    <PointForm userPoint="4000"/>
     <div>
       <div className="main_content">
         <div className="main_content_header">
@@ -53,17 +50,14 @@ function Point() {
           <div className="main_content_main_2">
             <button type="button" id="point1">
               <div className="point_hover">
-                <img className="point_img" src={img1} alt="point_img" />
               </div>
             </button>
             <button type="button" id="point2">
               <div className="point_hover">
-                <img className="point_img" src={img2} alt="point_img" />
               </div>
             </button>
             <button type="button" id="point3">
               <div className="point_hover">
-                <img className="point_img" src={img3} alt="point_img" />
               </div>
             </button>
           </div>

@@ -4,30 +4,36 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-function PointForm() {
+function PointForm({userPoint}) {
   const [show, setShow] = useState(false);
+  const [selectedPoint, setSelectedPoint] = useState(0);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
+  const handleShow = (value) => {
+      setSelectedPoint(value);
+      setShow(true);
+    }
+  
 
   return (
     <>
     <CardGroup className="text-center">
       <Card>
         <Card.Body>
-          <Button onClick={handleShow}><Card.Title>1,000 P</Card.Title></Button>
+          <Button onClick={()=>handleShow(1000)}><Card.Title>1,000 P</Card.Title></Button>
         </Card.Body>
         <Card.Footer className="text-muted">Cagong Point</Card.Footer>
       </Card>
       <Card>
         <Card.Body>
-        <Button onClick={handleShow}><Card.Title>5,000 P</Card.Title></Button>
+        <Button onClick={()=>handleShow(5000)}><Card.Title>5,000 P</Card.Title></Button>
         </Card.Body>
         <Card.Footer className="text-muted">Cagong Point</Card.Footer>
       </Card>
       <Card>
         <Card.Body>
-        <Button onClick={handleShow}><Card.Title>10,000 P</Card.Title></Button>
+        <Button onClick={()=>handleShow(10000)}><Card.Title>10,000 P</Card.Title></Button>
         </Card.Body>
         <Card.Footer className="text-muted">Cagong Point</Card.Footer>
       </Card>
@@ -38,9 +44,9 @@ function PointForm() {
           <Modal.Title>포인트 결제</Modal.Title>
         </Modal.Header>
         <Modal.Body className="text-center">
-          <p>기존 포인트 : 4000</p> 
-          <p>선택된 포인트 : 10000</p>
-          <p>충전 후 포인트 : 14000</p>
+          <p>기존 포인트 : {userPoint}</p> 
+          <p>선택된 포인트 : {selectedPoint}</p>
+          <p>충전 후 포인트 : {parseInt(userPoint) + selectedPoint}</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
