@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import { removeUser } from '../util/localstorage';
 import CustomToggle from './CustomToggle'; // 커스텀 버튼을 생성하는 컴포넌트
 import Push from './Push'; // 푸쉬알림 정보가 담길 임시 컴포넌트
 
 function MyProfile({ userInfo }) {
+  const navigate = useNavigate();
+
   const [showOffcanvas, setShowOffcanvas] = useState(false);
 
-  const handleShow = () => {
+  const handleShowOffcanvas = () => {
     if (userInfo) { 
       setShowOffcanvas(true);
     } else { 
@@ -16,8 +20,15 @@ function MyProfile({ userInfo }) {
     }
   };
 
-  const handleClose = () => {
+  const handleCloseOffcanvas = () => {
     setShowOffcanvas(false);
+  };
+
+  const handleSignoutClick = (e) => {
+    e.preventDefault();
+    alert('로그아웃 하시겠습니까?');
+    removeUser();
+    navigate('/');
   };
 
   // 프로필 사진 자리에 들어갈 것
@@ -42,7 +53,7 @@ function MyProfile({ userInfo }) {
           {SmallProfilePhoto}
         </Dropdown.Toggle>
         <Dropdown.Menu style={{ minWidth: '400px', padding: '20px'}}>
-          <Dropdown.Item onClick={handleShow} style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Dropdown.Item onClick={handleShowOffcanvas} style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <img src="/images/bell.png" alt="알림버튼" style={{ width: "30px", height: "30px" }}/>
           </Dropdown.Item>
           <div className="d-flex align-items-center justify-content-center mb-3">
@@ -53,12 +64,12 @@ function MyProfile({ userInfo }) {
           </Dropdown.Item>
           <Dropdown.Item href="#/action-4" disabled style={{ textAlign: 'center' }}>손님</Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item href="#/action-5" style={{ fontSize: '20px', color: 'grey', textAlign: 'center' }}>
+          <Dropdown.Item href="#/action-5" onClick={(e) => handleSignoutClick(e)} style={{ fontSize: '20px', color: 'grey', textAlign: 'center' }}>
             로그아웃
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-      <Offcanvas show={showOffcanvas} onHide={handleClose} placement="end">
+      <Offcanvas show={showOffcanvas} onHide={handleCloseOffcanvas} placement="end">
       <Offcanvas.Header closeButton>
         <Offcanvas.Title style={{ fontSize: '32px' }}>
           알림
