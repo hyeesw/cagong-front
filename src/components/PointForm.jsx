@@ -18,6 +18,8 @@ function PointForm({userPoint}) {
 
   return (
     <>
+    
+    {/* 포인트group */}
     <CardGroup className="text-center">
       <Card>
         <Card.Body>
@@ -39,6 +41,8 @@ function PointForm({userPoint}) {
       </Card>
     </CardGroup>
 
+    
+    {/* 모달창 */}
     <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
           <Modal.Title>포인트 결제</Modal.Title>

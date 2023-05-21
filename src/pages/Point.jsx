@@ -1,69 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import './Point.css';
 import {PointForm} from '../components';
+import Alert from 'react-bootstrap/Alert';
 
 function Point() {
-  // const [selectedPoint, setSelectedPoint] = useState(); // 현재 선택된 point
-
-  // const pointClicked = (id) => {
-  //   // id에 해당하는 hover의 테두리를 bold 처리하고, cur_point에 해당 id를 넣는다.
-  //   const num = Number(id.substr(5,6)); //point1
-  //   setSelectedPoint(num);
-  //   for (let i = 1; i <= 3; i += 1) {
-  //     if (id === i) document.querySelector(i).style.border = '5px solid red';
-  //     else document.querySelector(i).style.border = '0px';
-  //   }
-  //   return curPoint;
-  // };
-
-  // const [activePoint, setActivePoint] = useState(); // 현재 선택된 point
-  // const [deactivePoint, setDeactivePoint] = useState(null); // 과거 선택된 point
-
-  // useEffect(() => {
-  //   const pointClicked = (id) => {
-  //     // id = point1
-  //     setActivePoint(id);
-  //     if (deactivePoint != null) {
-  //       document.querySelector(deactivePoint).style.border = '0px'; // 이전값 border 해제
-  //     }
-  //     document.querySelector(activePoint).style.border = '5px solid red'; // 현재값 border ON.
-  //     setDeactivePoint(activePoint); // 이전값을 현재값과 동일하게 설정.
-  //   };
-  // }, []);
-  
-
-  // const payClicked = () => {
-  //   //cur_point를 이용해 팝업창을 연동시킨다. (팝업창에 값을 넘기고)
-  // }
+  const [userName, setUserName] = useState("hyeesw");
+  const [userPoint, setUserPoint] = useState(4000);
 
   return (
     <>
-    <PointForm userPoint="4000"/>
-    <div>
-      <div className="main_content">
-        <div className="main_content_header">
-          <div className="main_content_header_title">충전하기</div>
-          <div className="main_content_header_msg">충전 금액을 선택해주세요.</div>
-        </div>
-        <div className="main_content_main">
-          <div className="main_content_main_1">hyeesw 님의 현재 point 4000</div>
-          <div className="main_content_main_2">
-            <button type="button" id="point1">
-              <div className="point_hover">
-              </div>
-            </button>
-            <button type="button" id="point2">
-              <div className="point_hover">
-              </div>
-            </button>
-            <button type="button" id="point3">
-              <div className="point_hover">
-              </div>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+      <Alert variant="light" >
+        <Alert.Heading>충전하기</Alert.Heading>
+        <hr />
+        <p className="mb-0">
+          충전 금액을 선택해주세요.
+        </p>
+      </Alert>
+      <Alert variant="light" className="text-center">
+        <p>
+          {userName} 님의 현재 point
+        </p>
+        <p className="fs-3 fw-bold mb-5">
+          {userPoint}
+        </p>
+      </Alert>
+      <PointForm userPoint={userPoint}/>
     </>
   );
 }
