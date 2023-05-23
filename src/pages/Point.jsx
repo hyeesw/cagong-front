@@ -24,7 +24,7 @@ function Point() {
           {userPoint}
         </p>
       </Alert>
-      <PointForm userPoint={userPoint}/>
+      <PointForm userPoint={userPoint} setUserPoint={setUserPoint}/>
     </>
   );
 }

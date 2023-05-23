@@ -1,13 +1,19 @@
 //PointForm.jsx
 import React, { useState } from 'react';
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import {Card, CardGroup, Button, Modal} from 'react-bootstrap';
+import { getCookie } from '../util/cookie';
 
-function PointForm({userPoint}) {
+//백엔드에 필요한 것들
+import axios from 'axios';
+import { API_URL } from '../constants';
+
+
+function PointForm({userPoint, setUserPoint}) {
   const [show, setShow] = useState(false);
   const [selectedPoint, setSelectedPoint] = useState(0);
+
+  const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
+  const id = userInfo.user_id
 
   const handleClose = () => setShow(false);
 
@@ -18,43 +24,30 @@ function PointForm({userPoint}) {
 
     //백엔드랑 연동되는 부분
     // [결제하기] 버튼을 누르면 handlePayment() 가 실행됨 (onSubmit으로 해야된다는데 이럼 코드가 실행되지 않는 것 같은데...)
-    const handlePayment = () => {
-
-      const url = "/process-payment/" 
-      '/process-payment/'; //이 url로 이동함. (이 url은 views.py의 특정 함수를 실행하게함.)
-      //보낼 데이터 묶음.
-      const data = { 
-        "selected_point": selectedPoint,
-        "user_point": userPoint
-      };
-  
-      //요청 시작
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-      .then(response => {response.json(); console.log("여기까지 됨");})
-      .then(result => {
-        // 서버로부터의 응답을 처리하고 원하는 동작을 수행하세요.
-        console.log("성공!!!!!!!!!!");
-        console.log(result);
-      })
-      .catch(error => {
-        // 에러 처리를 수행하세요.
-        console.error('48번 줄 에러입니다:', error);
-      });
-  
-      handleClose();
+    const handlePayment = async (e) => {
+      e.preventDefault();
+      await axios
+        .post(`${API_URL}process_payment/`, {
+          selected_point: selectedPoint,
+          user_point: userPoint,
+          user_id: id,
+        },{ headers: { Authorization: `Bearer ${getCookie('access_token')}` } },)
+        .then((response) => {
+          console.log("안녕?");
+          console.log(response);
+          //////
+          setUserPoint(response.data.current_point);
+        })
+        .catch((err) => {
+          console.log("34번 줄 에러입니다 : ", err);
+        });
+        handleClose();
     }
 
 
   return (
     <>
-    
+
     {/* 포인트group */}
     <CardGroup className="text-center">
       <Card>
@@ -77,14 +70,14 @@ function PointForm({userPoint}) {
       </Card>
     </CardGroup>
 
-    
+
     {/* 모달창 */}
     <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
           <Modal.Title>포인트 결제</Modal.Title>
         </Modal.Header>
         <Modal.Body className="text-center">
-          <p>기존 포인트 : {userPoint}</p> 
+          <p>기존 포인트 : {userPoint}</p>
           <p>선택된 포인트 : {selectedPoint}</p>
           <p>충전 후 포인트 : {parseInt(userPoint) + selectedPoint}</p>
         </Modal.Body>
@@ -98,7 +91,7 @@ function PointForm({userPoint}) {
         </Modal.Footer>
       </Modal>
     </>
-    
+
   );
 }
 
