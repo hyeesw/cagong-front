@@ -4,8 +4,10 @@ import {PointForm} from '../components';
 import Alert from 'react-bootstrap/Alert';
 
 function Point() {
-  const [userName, setUserName] = useState("hyeesw");
-  const [userPoint, setUserPoint] = useState(4000);
+  const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
+
+  const [userName, setUserName] = useState(userInfo.username);
+  const [userPoint, setUserPoint] = useState(userInfo.point);
 
   return (
     <>
@@ -18,7 +20,7 @@ function Point() {
       </Alert>
       <Alert variant="light" className="text-center">
         <p>
-          {userName} 님의 현재 point
+          <strong>{userName}</strong> 님의 현재 point
         </p>
         <p className="fs-3 fw-bold mb-5">
           {userPoint}
