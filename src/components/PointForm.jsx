@@ -17,13 +17,15 @@ function PointForm({userPoint}) {
     }
 
     //백엔드랑 연동되는 부분
-    // [결제하기] 버튼을 누르면 handlePayment() 가 실행됨
+    // [결제하기] 버튼을 누르면 handlePayment() 가 실행됨 (onSubmit으로 해야된다는데 이럼 코드가 실행되지 않는 것 같은데...)
     const handlePayment = () => {
-      const url = '/process-payment/'; //이 url로 이동함. (이 url은 views.py의 특정 함수를 실행하게함.)
+
+      const url = "/process-payment/" 
+      '/process-payment/'; //이 url로 이동함. (이 url은 views.py의 특정 함수를 실행하게함.)
       //보낼 데이터 묶음.
       const data = { 
-        selected_point: selectedPoint,
-        user_point: userPoint
+        "selected_point": selectedPoint,
+        "user_point": userPoint
       };
   
       //요청 시작
@@ -31,18 +33,19 @@ function PointForm({userPoint}) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
         body: JSON.stringify(data),
       })
-      .then(response => response.json())
+      .then(response => {response.json(); console.log("여기까지 됨");})
       .then(result => {
         // 서버로부터의 응답을 처리하고 원하는 동작을 수행하세요.
-        console.log("이게 되네???????");
+        console.log("성공!!!!!!!!!!");
         console.log(result);
       })
       .catch(error => {
         // 에러 처리를 수행하세요.
-        console.error('Error:', error);
+        console.error('48번 줄 에러입니다:', error);
       });
   
       handleClose();
