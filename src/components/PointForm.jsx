@@ -1,3 +1,4 @@
+//PointForm.jsx
 import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
@@ -14,7 +15,39 @@ function PointForm({userPoint}) {
       setSelectedPoint(value);
       setShow(true);
     }
+
+    //백엔드랑 연동되는 부분
+    // [결제하기] 버튼을 누르면 handlePayment() 가 실행됨
+    const handlePayment = () => {
+      const url = '/process-payment/'; //이 url로 이동함. (이 url은 views.py의 특정 함수를 실행하게함.)
+      //보낼 데이터 묶음.
+      const data = { 
+        selected_point: selectedPoint,
+        user_point: userPoint
+      };
   
+      //요청 시작
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+      .then(response => response.json())
+      .then(result => {
+        // 서버로부터의 응답을 처리하고 원하는 동작을 수행하세요.
+        console.log("이게 되네???????");
+        console.log(result);
+      })
+      .catch(error => {
+        // 에러 처리를 수행하세요.
+        console.error('Error:', error);
+      });
+  
+      handleClose();
+    }
+
 
   return (
     <>
@@ -53,7 +86,7 @@ function PointForm({userPoint}) {
           <p>충전 후 포인트 : {parseInt(userPoint) + selectedPoint}</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handlePayment}>
             결제하기
           </Button>
           <Button variant="primary" onClick={handleClose}>
