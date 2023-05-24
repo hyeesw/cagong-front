@@ -4,10 +4,9 @@ import {PointForm, SuggestLoginForm} from '../components';
 import Alert from 'react-bootstrap/Alert';
 
 function Point() {
-  const userInfo = JSON.parse(window.localStorage.getItem('userInfo')) //로그인 한 유저 객체 가져오기
+  const userInfo = JSON.parse(window.localStorage.getItem('userInfo')); //로그인 한 유저 객체 가져오기
   
   if(userInfo == null){ //로그인 안한 유저의 경우
-    console.log("널임을 확인할 수 있습니다.");
     return(
       <SuggestLoginForm></SuggestLoginForm> //"로그인해주세요" 페이지
     );
@@ -15,8 +14,14 @@ function Point() {
   const userName =  userInfo.username; // 유저 이름
   const user_id =  userInfo.user_id; // 유저 ID
   const [userPoint, setUserPoint] = useState(userInfo.point); //유저 point
+  const [userChanged, setUserChanged] = useState(false); //localsotrage에 반영하기 위함
   
-  console.log("실행됨?")
+  //localstorage에 userInfo 객체 다시 등록 (변경사항이 있으므로)
+  if(userChanged){
+    userInfo.point =  userPoint; //새로운 userPoint로 업데이트 하기
+    window.localStorage.removeItem('userInfo');
+    window.localStorage.setItem('userInfo', JSON.stringify(userInfo));
+  }
 
   return (
     <>
@@ -35,7 +40,7 @@ function Point() {
           {userPoint}
         </p>
       </Alert>
-      <PointForm userID={user_id} userPoint={userPoint} setUserPoint={setUserPoint}/>
+      <PointForm userID={user_id} userPoint={userPoint} setUserPoint={setUserPoint} setUserChanged={setUserChanged}/>
     </>
   );
 }
