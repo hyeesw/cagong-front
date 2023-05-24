@@ -22,25 +22,26 @@ function PointForm({userID, userPoint, setUserPoint, setUserChanged}) {
 
     //백엔드랑 연동되는 부분
     // [결제하기] 버튼을 누르면 handlePayment() 실행됨.
-    const handlePayment = async (e) => {
-      e.preventDefault();
-      await axios
+    const handlePayment = async () => {
+      await axios //axios로 서버에 요청 보내는 부분 시작!
         .post(`${API_URL}process_payment/`, {  //백엔드의 url 요청과 보낼 data 객체 
           selected_point: selectedPoint,
           user_point: userPoint,
           user_id: userID,
-        },
-        // hearder를 설정해줌으로서 token이 있는 사람(로그인된 사람)만 기능을 사용할 수 있도록
-        { headers: { Authorization: `Bearer ${getCookie('access_token')}` } },)
-        .then((response) => { //백엔드에서 response 받는 부분
+        },{
+          headers: { Authorization: `Bearer ${getCookie('access_token')}` }  //hearder를 설정해줌으로서 token이 있는 사람(로그인된 사람)만 기능을 사용할 수 있도록
+        }).then((response) => { 
+          //백엔드에서 response 받는 부분
           //setUserPoint는 Point.jsx에서 인자로 넘어온 setter이므로, 얘로 userPoint값 바꾸면, 페이지가 자동 렌더링되며, Point.jsx에도 반영이 된다!!
           setUserPoint(response.data.current_point); 
           setUserChanged(true); //localstorage의 userInfo 객체의 Point를 업데이트 해야된다고 표시해둠! (이후 Point.jsx의 20번 라인에서 업데이트 됨)
-        })
-        .catch((err) => { //에러 잡는 구문
+        }).catch((err) => { 
+          //에러 잡는 구문
           console.log("41번 줄 에러입니다 : ", err);
         });
-        handleClose(); //모달 창 닫기
+        
+        //모달 창 닫기
+        handleClose(); 
     }
 
 
