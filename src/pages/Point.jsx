@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import './Point.css';
-import {PointForm} from '../components';
+import {PointForm, SuggestLoginForm} from '../components';
 import Alert from 'react-bootstrap/Alert';
 
 function Point() {
-  const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
-
-  const [userName, setUserName] = useState(userInfo.username);
-  const [userPoint, setUserPoint] = useState(userInfo.point);
+  const userInfo = JSON.parse(window.localStorage.getItem('userInfo')) //로그인 한 유저 객체 가져오기
+  
+  if(userInfo == null){ //로그인 안한 유저의 경우
+    console.log("널임을 확인할 수 있습니다.");
+    return(
+      <SuggestLoginForm></SuggestLoginForm> //"로그인해주세요" 페이지
+    );
+  }
+  const userName =  userInfo.username; // 유저 이름
+  const user_id =  userInfo.user_id; // 유저 ID
+  const [userPoint, setUserPoint] = useState(userInfo.point); //유저 point
+  
+  console.log("실행됨?")
 
   return (
     <>
@@ -26,7 +35,7 @@ function Point() {
           {userPoint}
         </p>
       </Alert>
-      <PointForm userPoint={userPoint} setUserPoint={setUserPoint}/>
+      <PointForm userID={user_id} userPoint={userPoint} setUserPoint={setUserPoint}/>
     </>
   );
 }

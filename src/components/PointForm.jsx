@@ -8,40 +8,42 @@ import axios from 'axios';
 import { API_URL } from '../constants';
 
 
-function PointForm({userPoint, setUserPoint}) {
-  const [show, setShow] = useState(false);
-  const [selectedPoint, setSelectedPoint] = useState(0);
+function PointForm({userID, userPoint, setUserPoint}) {
+  const [show, setShow] = useState(false); //모달 show, close 상태
+  const [selectedPoint, setSelectedPoint] = useState(0); //선택된 포인트
 
-  const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
-  const id = userInfo.user_id
-
-  const handleClose = () => setShow(false);
-
+  //모달 close 함수
+  const handleClose = () => setShow(false); 
+  //모달 show 함수 (value: 선택된 값)
   const handleShow = (value) => {
       setSelectedPoint(value);
       setShow(true);
     }
 
     //백엔드랑 연동되는 부분
-    // [결제하기] 버튼을 누르면 handlePayment() 가 실행됨 (onSubmit으로 해야된다는데 이럼 코드가 실행되지 않는 것 같은데...)
+    // [결제하기] 버튼을 누르면 handlePayment() 실행됨.
+    //요청시작 ()
+    //
     const handlePayment = async (e) => {
       e.preventDefault();
       await axios
-        .post(`${API_URL}process_payment/`, {
+        .post(`${API_URL}process_payment/`, {  //백엔드의 url 요청과 보낼 data 객체 
           selected_point: selectedPoint,
           user_point: userPoint,
-          user_id: id,
-        },{ headers: { Authorization: `Bearer ${getCookie('access_token')}` } },)
-        .then((response) => {
+          user_id: userID,
+        },
+        // hearder를 설정해줌으로서 token이 있는 사람(로그인된 사람)만 기능을 사용할 수 있도록
+        { headers: { Authorization: `Bearer ${getCookie('access_token')}` } },)
+        .then((response) => { //백엔드에서 response 받는 부분
           console.log("안녕?");
           console.log(response);
-          //////
-          setUserPoint(response.data.current_point);
+          setUserPoint(response.data.current_point); 
+          //setUserPoint는 Point.jsx에서 인자로 넘어온 setter이므로, 얘로 userPoint값 바꾸면, 페이지가 자동 렌더링되며, Point.jsx에도 반영이 된다!!
         })
-        .catch((err) => {
+        .catch((err) => { //에러 잡는 구문
           console.log("34번 줄 에러입니다 : ", err);
         });
-        handleClose();
+        handleClose(); //모달 창 닫기
     }
 
 
