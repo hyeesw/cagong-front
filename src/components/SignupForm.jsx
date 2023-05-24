@@ -77,8 +77,6 @@ function SignupForm() {
 
   return (
     <Form onSubmit={handleSignupSubmit}>
-      
-
       <Form.Group className="mb-3" controlId="formBasicId">
         <Form.Label>ID</Form.Label>
         <Form.Control
@@ -147,13 +145,14 @@ function SignupForm() {
           }}
         />
       </Form.Group>
-
       {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
         <Form.Check type="checkbox" label="Check me out" />
         </Form.Group> */}
-
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" style={{ marginRight: '10px' }}>
         Signup
+      </Button>
+      <Button variant="secondary" type="button" onClick={() => navigate('/')}>
+        홈으로
       </Button>
     </Form>
   );
