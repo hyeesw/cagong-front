@@ -11,6 +11,7 @@ function SignupForm() {
   const [phone, setphone] = useState();
   const [email, setemail] = useState();
   const [username, setusername] = useState(); // nickname
+  const [confirmPassword, setconfirmPassword] = useState();
   // const [type, settype] = useState();
   const navigate = useNavigate();
 
@@ -47,6 +48,13 @@ function SignupForm() {
 
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
+
+    // 비밀번호와 비밀번호 확인이 일치하지 않는 경우
+    if (password !== confirmPassword) {
+      alert('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+
     await axios
       .post(`${API_URL}signup/`, {
         user_id: userId,
@@ -56,14 +64,14 @@ function SignupForm() {
         username: username,
         type: 'CUSTOMERUSER',
       })
-      .then((res) => {
+      .then((res) => {  // 회원가입 성공. res는 JSON 형식으로 반환된 객체 {"message": "회원가입 완료!"}
         console.log(res);
-        alert('회원가입되었습니다!');
+        alert(res.data['message']);
         navigate('/login');
-
       })
-      .catch((err) => {
+      .catch((err) => {  // 회원가입 실패.
         console.log(err);
+        alert('에러. 회원가입 실패');
       });
   };
 
@@ -89,6 +97,17 @@ function SignupForm() {
           placeholder="Password"
           onChange={(e) => {
             setpassword(e.target.value);
+          }}
+        />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
+        <Form.Label>Confirm Password</Form.Label>
+        <Form.Control
+          type="password"
+          placeholder="Confirm Password"
+          onChange={(e) => {
+            setconfirmPassword(e.target.value);
           }}
         />
       </Form.Group>
