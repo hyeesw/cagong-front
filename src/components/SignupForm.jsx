@@ -67,7 +67,7 @@ function SignupForm() {
         // 회원가입 성공. res는 JSON 형식으로 반환된 객체 {"message": "회원가입 완료!"}
         console.log(res);
         alert(res.data.message);
-        navigate('/login');
+        navigate('/signin');
       })
       .catch((err) => {
         // 회원가입 실패.

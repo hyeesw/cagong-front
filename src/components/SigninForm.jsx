@@ -27,9 +27,9 @@ function SigninForm() {
     get();
   }, []);
 
-  useEffect(() => {
-    console.log(userId, password);
-  }, [userId, password]);
+  // useEffect(() => {
+  //   console.log(userId, password);
+  // }, [userId, password]);
 
   // const ex = {
   //   user_id: 'user1',
