@@ -4,22 +4,25 @@ import { API_URL } from '../constants/index';
 
 // NOTE: 일단 access_token만 유효성 검증, refresh_token은 검증 안함
 const verifyToken = async () => {
-  const response = await axios
-    .post(
-      `${API_URL}token/verify/`,
-      { token: getCookie('access_token') },
-      { headers: { Authorization: `Bearer ${getCookie('access_token')}` } },
-    )
-    .then((res) => {
-      // console.log(res);
-      return res;
-    })
-    .catch((err) => {
-      // console.log(err);
-      return err;
-    });
-  if (response.status === 200) {
-    return true;
+  const accessToken = getCookie('access_token');
+  if (accessToken) {
+    const response = await axios
+      .post(
+        `${API_URL}token/verify/`,
+        { token: accessToken },
+        { headers: { Authorization: `Bearer ${accessToken}}` } },
+      )
+      .then((res) => {
+        // console.log(res);
+        return res;
+      })
+      .catch((err) => {
+        // console.log(err);
+        return err;
+      });
+    if (response.status === 200) {
+      return true;
+    }
   }
   return false;
 };
