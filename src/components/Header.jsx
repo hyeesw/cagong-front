@@ -1,55 +1,36 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
-import { getUser, removeUser } from '../util/localstorage';
+import { getUser } from '../util/localstorage';
 import MyProfile from './MyProfile';
+import './Header.css';
 
 function Header() {
   const userInfo = getUser();
-  // const userInfo = 'asdf'; // 로그인된 경우 테스트용
-  const navigate = useNavigate();
-
-  const handleSignoutClick = (e) => {
-    e.preventDefault();
-    alert('로그아웃 하시겠습니까?');
-    removeUser();
-    navigate('/');
-  };
 
   return (
-    <Nav variant="pills" defaultActiveKey="link-0">
-      <Nav.Item>
+    <Nav defaultActiveKey="link-0" className="header">
+
+      {/*홈 페이지*/}
+      <Nav.Item className="header-logo">
         <Nav.Link href="/" eventKey="link-0">
-          Home
+          <img src="/images/header-logo-no-background.png" alt="Home Button" style={{ width: '180px', height: '60px' }} />
         </Nav.Link>
       </Nav.Item>
-      {userInfo ? (
-        // 로그인된 상태
-        <Nav.Item>
-          <Nav.Link href="#" eventKey="link-1" onClick={(e) => handleSignoutClick(e)}>
-            Signout
-          </Nav.Link>
-        </Nav.Item>
-      ) : (  // 로그인되지 않은 상태 
-        <>
-          <Nav.Item>
-            <Nav.Link href="/signup" eventKey="link-2">
-              Signup
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href="/signin" eventKey="link-1">
-              Signin
-            </Nav.Link>
-          </Nav.Item>
-        </>
-      )}
-      <Nav.Item>
-        <Nav.Link href="/point" eventKey="link-3">
-          Point
+
+      {/*검색*/}
+      <Nav.Item className="header-search">
+        (검색 창 들어갈 자리)
+      </Nav.Item>
+
+      {/*포인트 페이지*/}
+      <Nav.Item className="header-button">
+        <Nav.Link href="/point" eventKey="link-1">
+          포인트
         </Nav.Link>
       </Nav.Item>
-      <Nav.Item>
+
+      {/*프로필*/}
+      <Nav.Item className="header-profile">
         <MyProfile userInfo={userInfo} />
       </Nav.Item>
     </Nav>
