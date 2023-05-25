@@ -109,6 +109,7 @@ function MyProfile({ userInfo }) {
           알림
         </Offcanvas.Title>
       </Offcanvas.Header>
+
         <Offcanvas.Body>
           <Push />
           <Push />

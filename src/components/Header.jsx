@@ -31,12 +31,18 @@ function Header() {
           </Nav.Link>
         </Nav.Item>
       ) : (
-        // 로그인되지 않은 상태
-        <Nav.Item>
-          <Nav.Link href="/signin" eventKey="link-1">
-            Signin
-          </Nav.Link>
-        </Nav.Item>
+        <>
+          <Nav.Item>
+            <Nav.Link href="/signup" eventKey="link-2">
+              Signup
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link href="/signin" eventKey="link-1">
+              Signin
+            </Nav.Link>
+          </Nav.Item>
+        </>
       )}
       <Nav.Item>
         <MyProfile userInfo={userInfo} />
