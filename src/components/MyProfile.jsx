@@ -29,6 +29,11 @@ function MyProfile({ userInfo }) {
     navigate('/signin');
   };
 
+  const handleSignupClick = (e) => {
+    e.preventDefault();
+    navigate('/signup');
+  }
+
   const handleSignoutClick = (e) => {
     e.preventDefault();
     alert('로그아웃 하시겠습니까?');
@@ -49,7 +54,7 @@ function MyProfile({ userInfo }) {
 
   return (
     <>
-      <Dropdown>
+      <Dropdown align="end" style={{ position: 'relative' }}>
         <Dropdown.Toggle
           as={CustomToggle}
           id="dropdown-custom-components"
@@ -58,7 +63,7 @@ function MyProfile({ userInfo }) {
           {SmallProfilePhoto}
         </Dropdown.Toggle>
 
-        <Dropdown.Menu style={{ minWidth: '400px', padding: '20px'}}>
+        <Dropdown.Menu align="end" style={{ minWidth: '400px', padding: '20px', position: 'absolute', right: 0}}>
           {userInfo 
             ?  // 로그인 O
             <>
@@ -85,9 +90,14 @@ function MyProfile({ userInfo }) {
               </Dropdown.Item>
               <br />
               <Dropdown.Divider />
-              <Dropdown.Item href="#/action-5" onClick={(e) => handleSigninClick(e)} style={{ fontSize: '20px', color: 'black', textAlign: 'center' }}>
-                로그인
-              </Dropdown.Item>
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <Dropdown.Item href="#/action-5" onClick={(e) => handleSignupClick(e)} style={{ fontSize: '20px', color: 'black', textAlign: 'center' }}>
+                  회원가입
+                </Dropdown.Item>
+                <Dropdown.Item href="#/action-5" onClick={(e) => handleSigninClick(e)} style={{ fontSize: '20px', color: 'black', textAlign: 'center' }}>
+                  로그인
+                </Dropdown.Item>
+              </div>
             </>
           }
         </Dropdown.Menu>
@@ -99,6 +109,7 @@ function MyProfile({ userInfo }) {
           알림
         </Offcanvas.Title>
       </Offcanvas.Header>
+
         <Offcanvas.Body>
           <Push />
           <Push />

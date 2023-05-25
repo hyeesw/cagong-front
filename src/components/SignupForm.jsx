@@ -15,7 +15,6 @@ function SignupForm() {
   // const [type, settype] = useState();
   const navigate = useNavigate();
 
-
   const get = () => {
     axios
       .get(`${API_URL}signup`)
@@ -64,12 +63,14 @@ function SignupForm() {
         username: username,
         type: 'CUSTOMERUSER',
       })
-      .then((res) => {  // 회원가입 성공. res는 JSON 형식으로 반환된 객체 {"message": "회원가입 완료!"}
+      .then((res) => {
+        // 회원가입 성공. res는 JSON 형식으로 반환된 객체 {"message": "회원가입 완료!"}
         console.log(res);
-        alert(res.data['message']);
+        alert(res.data.message);
         navigate('/login');
       })
-      .catch((err) => {  // 회원가입 실패.
+      .catch((err) => {
+        // 회원가입 실패.
         console.log(err);
         alert('에러. 회원가입 실패');
       });
@@ -128,13 +129,13 @@ function SignupForm() {
           placeholder="Email"
           onChange={(e) => {
             setemail(e.target.value);
-        }}
+          }}
         />
         <Form.Text className="text-muted">
           We&apos;ll never share your email with anyone else.
         </Form.Text>
       </Form.Group>
-      
+
       <Form.Group className="mb-3" controlId="formBasicUsername">
         <Form.Label>Username</Form.Label>
         <Form.Control
