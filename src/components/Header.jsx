@@ -30,7 +30,7 @@ function Header() {
             Signout
           </Nav.Link>
         </Nav.Item>
-      ) : (
+      ) : (  // 로그인되지 않은 상태 
         <>
           <Nav.Item>
             <Nav.Link href="/signup" eventKey="link-2">
@@ -44,6 +44,11 @@ function Header() {
           </Nav.Item>
         </>
       )}
+      <Nav.Item>
+        <Nav.Link href="/point" eventKey="link-3">
+          Point
+        </Nav.Link>
+      </Nav.Item>
       <Nav.Item>
         <MyProfile userInfo={userInfo} />
       </Nav.Item>
