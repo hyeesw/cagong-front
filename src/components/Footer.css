@@ -1,10 +1,15 @@
 .footer {
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: transparent;
-    padding: 15px 150px; /* 세로방향 가로방향 */
+    padding: 15px 250px; /* 세로방향 가로방향 */
     border-top: 1px solid #ccc; /* 아래에 테두리 추가 */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
   
   .footer-button {
