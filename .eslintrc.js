@@ -18,6 +18,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 0,
     'no-script-url': 0,
     'arrow-body-style': 0,
+    'react/prop-types': 0,
     'prettier/prettier': [
       'error',
       {

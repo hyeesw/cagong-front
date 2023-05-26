@@ -10,7 +10,7 @@ const verifyToken = async () => {
       .post(
         `${API_URL}token/verify/`,
         { token: accessToken },
-        { headers: { Authorization: `Bearer ${accessToken}}` } },
+        { headers: { Authorization: `Bearer ${accessToken}` } },
       )
       .then((res) => {
         // console.log(res);
