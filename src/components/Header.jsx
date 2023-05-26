@@ -2,9 +2,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 import { getUser, removeUser } from '../util/localstorage';
+import MyProfile from './MyProfile';
 
 function Header() {
   const userInfo = getUser();
+  // const userInfo = 'asdf'; // 로그인된 경우 테스트용
   const navigate = useNavigate();
 
   const handleSignoutClick = (e) => {
@@ -22,6 +24,7 @@ function Header() {
         </Nav.Link>
       </Nav.Item>
       {userInfo ? (
+        // 로그인된 상태
         <Nav.Item>
           <Nav.Link href="#" eventKey="link-1" onClick={(e) => handleSignoutClick(e)}>
             Signout
@@ -41,6 +44,9 @@ function Header() {
           </Nav.Item>
         </>
       )}
+      <Nav.Item>
+        <MyProfile userInfo={userInfo} />
+      </Nav.Item>
     </Nav>
   );
 }

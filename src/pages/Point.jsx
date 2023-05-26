@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import './Point.css';
-import {PointForm, SuggestLoginForm} from '../components';
+import { useNavigate } from 'react-router-dom';
+import {PointForm} from '../components';
 import Alert from 'react-bootstrap/Alert';
 
 function Point() {
   const userInfo = JSON.parse(window.localStorage.getItem('userInfo')); //로그인 한 유저 객체 가져오기
-  
-  if(userInfo == null){ //로그인 안한 유저의 경우
-    return(
-      <SuggestLoginForm></SuggestLoginForm> //"로그인해주세요" 페이지
-    );
+  const navigate = useNavigate();
+
+  //로그인 안한 유저의 경우
+  if(userInfo == null){
+      alert('현재 페이지는 로그인을 하신 후 이용하실 수 있습니다.');
+      useEffect(()=>{
+        navigate('/signin', true); //로그인 페이지로 리다이렉트
+      });
+      return
   }
+
+
   const userName =  userInfo.username; // 유저 이름
   const user_id =  userInfo.user_id; // 유저 ID
   const [userPoint, setUserPoint] = useState(userInfo.point); //유저 point
