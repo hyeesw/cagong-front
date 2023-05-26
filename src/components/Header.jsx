@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 import { getUser } from '../util/localstorage';
+import CustomToggle from './CustomToggle'; // 커스텀 버튼을 생성하는 컴포넌트
 import MyProfile from './MyProfile';
 import './Header.css';
 
@@ -25,10 +26,8 @@ function Header() {
       </Nav.Item>
 
       {/*포인트 페이지*/}
-      <Nav.Item className="header-button">
-        <Nav.Link href="/point" eventKey="link-1">
-          포인트
-        </Nav.Link>
+      <Nav.Item>
+        <CustomToggle className="header-button" onClick={() => navigate('/point')} eventKey="link-1">포인트</CustomToggle>
       </Nav.Item>
 
       {/*프로필*/}

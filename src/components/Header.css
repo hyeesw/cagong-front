@@ -1,7 +1,8 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 20px;
   background-color: transparent;
   padding: 15px 150px; /* 세로방향 가로방향 */
   border-bottom: 1px solid #ccc; /* 아래에 테두리 추가 */
@@ -16,38 +17,32 @@
 }
 
 .header-button {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: lightgrey;
-    font-size: 12px;
-    white-space: nowrap;  /* 줄바꿈 방지*/
-    overflow: hidden;
-    display: flex;
-    align-items: center;  /* 수직방향 가운데 정렬 */
-    justify-content: center;  /* 수평방향 가운데 정렬 */
-    margin: 0 12px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: lightgrey;
+  color: black;
+  text-decoration: none;
+  font-size: 12px;
+  white-space: nowrap;  /* 줄바꿈 방지*/
+  overflow: hidden;
+  display: flex;
+  align-items: center;  /* 수직방향 가운데 정렬 */
+  justify-content: center;  /* 수평방향 가운데 정렬 */
+  margin: 0 12px;
   }
 
-  .header-button:hover {
-    background-color: grey; /* 커서를 올렸을 때 */
-  }
+.header-button:hover {
+  background-color: grey; /* 커서를 올렸을 때 */
+  color: white;
+}
 
-  .header-button-link {
-    color: black;
-  }
-
-  .header-button-link:hover {
-    color: inherit !important;  /* 커서를 올려도 부모 요소의 글자색 유지 */
-  }
-
-
-  .header-profile {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;  /* 수직방향 가운데 정렬 */
-    justify-content: center;  /* 수평방향 가운데 정렬 */
-    margin: 0 12px;
-  }
+.header-profile {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;  /* 수직방향 가운데 정렬 */
+  justify-content: center;  /* 수평방향 가운데 정렬 */
+  margin: 0 12px;
+}
