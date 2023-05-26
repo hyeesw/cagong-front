@@ -12,25 +12,32 @@ function Header() {
 
   return (
     <Nav defaultActiveKey="link-0" className="header">
-      
-      {/*홈 페이지*/}
+      {/* 홈 페이지 */}
       <Nav.Item className="header-logo">
         <Nav.Link href="/" eventKey="link-0">
-          <img src="/images/header-logo-no-background.png" alt="Home Button" style={{ width: '180px', height: '60px' }} />
+          <img
+            src="/images/header-logo-no-background.png"
+            alt="Home Button"
+            style={{ width: '180px', height: '60px' }}
+          />
         </Nav.Link>
       </Nav.Item>
 
-      {/*검색*/}
-      <Nav.Item className="header-search">
-        (검색 창 들어갈 자리)
-      </Nav.Item>
+      {/* 검색 */}
+      <Nav.Item className="header-search">(검색 창 들어갈 자리)</Nav.Item>
 
-      {/*포인트 페이지*/}
+      {/* 포인트 페이지 */}
       <Nav.Item>
-        <CustomToggle className="header-button" onClick={() => navigate('/point')} eventKey="link-1">포인트</CustomToggle>
+        <CustomToggle
+          className="header-button"
+          onClick={() => navigate('/point')}
+          eventKey="link-1"
+        >
+          포인트
+        </CustomToggle>
       </Nav.Item>
 
-      {/*프로필*/}
+      {/* 프로필 */}
       <Nav.Item className="header-profile">
         <MyProfile userInfo={userInfo} />
       </Nav.Item>

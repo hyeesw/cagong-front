@@ -27,9 +27,7 @@ const dot = (date, view, mark, duration) => {
     }
   });
   // 다른 조건을 주어서 html.push 에 추가적인 html 태그를 적용할 수 있음.
-  return (
-    <div className="flex justify-center items-center absoluteDiv text-center w-100">{html}</div>
-  );
+  return <div className="duration-box absoluteDiv text-left w-100">{html}</div>;
 };
 
 function MyCalendar() {
@@ -86,7 +84,7 @@ function MyCalendar() {
       <Col md="auto">
         <div style={{ display: 'inline-block' }}>
           <Calendar
-            className="mx-auto w-full text-sm border-b flex"
+            className="mx-3 text-sm border-b flex"
             onChange={setvelue} // 포커스 변경시 현재날짜 받아오기
             formatDay={(locale, date) => moment(date).format('DD')} // 숫자만 보이기
             value={value}
@@ -97,7 +95,7 @@ function MyCalendar() {
         </div>
       </Col>
       <Col md="auto">
-        <div style={{ display: 'inline-block', width: '300px' }}>
+        <div style={{ display: 'inline-block' }}>
           <RecordDetail value={value} records={records} />
         </div>
       </Col>

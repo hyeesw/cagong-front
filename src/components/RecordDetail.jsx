@@ -4,7 +4,7 @@ import { Card, CardGroup } from 'react-bootstrap';
 function RecordDetail() {
   return (
     <CardGroup>
-      <Card className="shadow">
+      <Card className="shadow mx-3" style={{ width: '400px' }}>
         <Card.Body>
           <Card.Title>details</Card.Title>
           <Card.Subtitle>subtitle</Card.Subtitle>

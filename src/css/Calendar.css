@@ -30,6 +30,18 @@ abbr[title] {
 /* .react-calendar__month-view__days__day--weekend {
   color: #d10000;
  } */
+.react-calendar__tile {
+  box-sizing: border-box;
+  height: 65px;
+  position: relative;
+}
+.duration-box {
+  position: absolute;
+  bottom: 0;
+  text-align: left;
+}
+.duration {
+}
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
   background: #f8f8fa;
