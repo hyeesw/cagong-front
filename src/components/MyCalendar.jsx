@@ -4,10 +4,13 @@ import Calendar from 'react-calendar';
 import moment from 'moment/moment';
 import 'react-calendar/dist/Calendar.css';
 import '../css/Calendar.css';
+import { Row, Col } from 'react-bootstrap';
 
 import axios from 'axios';
 import { API_URL } from '../constants';
 import { getCookie } from '../util/cookie';
+
+import RecordDetail from './RecordDetail';
 
 const dot = (date, view, mark, duration) => {
   // 날짜 타일에 컨텐츠 추가하기 (html 태그)
@@ -79,17 +82,26 @@ function MyCalendar() {
   }, []);
 
   return (
-    <div className="p-3">
-      <Calendar
-        className="mx-auto w-full text-sm border-b"
-        onChange={setvelue} // 포커스 변경시 현재날짜 받아오기
-        formatDay={(locale, date) => moment(date).format('DD')} // 숫자만 보이기
-        value={value}
-        // showNeighboringMonth={false} //  이전, 이후 달의 날짜는 보이지 않도록 설정
-        tileContent={({ date, view }) => dot(date, view, mark, duration)}
-      />
-      <div className="text-gray-500 mt-4">{moment(value).format('YYYY년 MM월 DD일')}</div>
-    </div>
+    <Row className="justify-content-md-center py-3 ">
+      <Col md="auto">
+        <div style={{ display: 'inline-block' }}>
+          <Calendar
+            className="mx-auto w-full text-sm border-b flex"
+            onChange={setvelue} // 포커스 변경시 현재날짜 받아오기
+            formatDay={(locale, date) => moment(date).format('DD')} // 숫자만 보이기
+            value={value}
+            // showNeighboringMonth={false} //  이전, 이후 달의 날짜는 보이지 않도록 설정
+            tileContent={({ date, view }) => dot(date, view, mark, duration)}
+          />
+          <div className="text-gray-500 mt-4">{moment(value).format('YYYY년 MM월 DD일')}</div>
+        </div>
+      </Col>
+      <Col md="auto">
+        <div style={{ display: 'inline-block', width: '300px' }}>
+          <RecordDetail value={value} records={records} />
+        </div>
+      </Col>
+    </Row>
   );
 }
 
