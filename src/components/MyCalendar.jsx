@@ -46,7 +46,7 @@ function MyCalendar() {
     const userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
     const accessToken = getCookie('access_token');
     const result = await axios
-      .get(`${API_URL}record_list/${userInfo.user_id}`, {
+      .get(`${API_URL}record/record_list/${userInfo.user_id}`, {
         headers: { Authorization: `Bearer ${accessToken}` },
       })
       .then((res) => {
