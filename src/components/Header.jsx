@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 import { getUser } from '../util/localstorage';
 import MyProfile from './MyProfile';
@@ -6,10 +7,11 @@ import './Header.css';
 
 function Header() {
   const userInfo = getUser();
+  const navigate = useNavigate(); // !!!없애면 안됨!!!
 
   return (
     <Nav defaultActiveKey="link-0" className="header">
-
+      
       {/*홈 페이지*/}
       <Nav.Item className="header-logo">
         <Nav.Link href="/" eventKey="link-0">
@@ -36,4 +38,5 @@ function Header() {
     </Nav>
   );
 }
+
 export default Header;
