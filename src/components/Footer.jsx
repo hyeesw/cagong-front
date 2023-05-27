@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 import CustomToggle from './CustomToggle'; // 커스텀 버튼을 생성하는 컴포넌트
-import './Footer.css';
+import '../css/Footer.css';
 
 function Footer() {
   const navigate = useNavigate();
