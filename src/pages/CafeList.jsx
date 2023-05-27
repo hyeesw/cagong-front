@@ -9,7 +9,7 @@ import { API_URL } from '../constants';
 
 
 function CardArray() {
-    let [dataArray, setDataArray] = useState(['해물찜', '라면', '스시', '육회']);
+    const [dataArray, setDataArray] = useState(['해물찜', '라면', '스시', '육회']);
     return(
         <Container>
             {
@@ -89,7 +89,14 @@ function CafeList() {
         search_value: searchValue,
       }).then((response) => { 
         console.log(response.data.search_result)
-
+        
+        if(response.data.search_result === "null") {
+          console.log("검색 결과가 없습니다.")
+        } else{
+          let result = JSON.parse(response.data.search_result);
+          console.log("json 결과!")
+          console.log(result)
+        }
         //백엔드에서 response 받는 부분
         //setUserPoint는 Point.jsx에서 인자로 넘어온 setter이므로, 얘로 userPoint값 바꾸면, 페이지가 자동 렌더링되며, Point.jsx에도 반영이 된다!!
         // setUserPoint(response.data.current_point); 
