@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import Calendar from 'react-calendar';
 import moment from 'moment/moment';
 import 'react-calendar/dist/Calendar.css';
@@ -11,6 +11,7 @@ import { API_URL } from '../constants';
 import { getCookie } from '../util/cookie';
 
 import RecordDetail from './RecordDetail';
+import { getUser } from '../util/localstorage';
 
 const dot = (date, view, mark, duration) => {
   // 날짜 타일에 컨텐츠 추가하기 (html 태그)
@@ -36,12 +37,13 @@ function MyCalendar() {
   const [mark, setMark] = useState([]); // ["2022-02-02", "2022-02-02", "2022-02-10"] 형태
   const [duration, setduration] = useState([]); // ["00:00:00", "1 22:33:55", "00:44:55"] 형태
 
-  useEffect(() => {
-    console.log('records', records);
-  }, [records]);
+  const navigate = useNavigate();
 
-  const getMarks = async () => {
-    const userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
+  // useEffect(() => {
+  //   console.log('records', records);
+  // }, [records]);
+
+  const getMarks = async (userInfo) => {
     const accessToken = getCookie('access_token');
     const result = await axios
       .get(`${API_URL}record/record_list/${userInfo.user_id}`, {
@@ -76,7 +78,15 @@ function MyCalendar() {
   };
 
   useEffect(() => {
-    getMarks();
+    const userInfo = getUser();
+    if (!userInfo) {
+      // console.log('회원정보가 없거나 토큰무효');
+      alert('로그인이 필요합니다.');
+      navigate('/signin');
+      return;
+    }
+
+    getMarks(userInfo);
   }, []);
 
   return (
