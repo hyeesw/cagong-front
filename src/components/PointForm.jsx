@@ -25,7 +25,7 @@ function PointForm({ userID, userPoint, setUserPoint, setUserChanged }) {
   const handlePayment = async () => {
     await axios // axios로 서버에 요청 보내는 부분 시작!
       .post(
-        `${API_URL}process_payment/`,
+        `${API_URL}charge_point/`,
         {
           // 백엔드의 url 요청과 보낼 data 객체
           selected_point: selectedPoint,
