@@ -8,22 +8,32 @@ import axios from 'axios';
 import { API_URL } from '../constants';
 
 
-function CardArray() {
-    const [dataArray, setDataArray] = useState(['해물찜', '라면', '스시', '육회']);
+function CardArray(dataArray) {
+  console.log("---------시작----------")
+
+  const [dataArray1, setDataArray] = useState(Object.values(dataArray));
+  console.log("아이템: ",dataArray1)
+  console.log("아이템: ",dataArray1[0])
+
     return(
         <Container>
             {
-                dataArray.map((content, idx)=>{
+                  dataArray1.length>0 && dataArray1.map((idx)=>{
+                  console.log(dataArray1[0])
+                  // console.log("이름: ", item.name)
+                  // console.log("위치: ",item.location)
+                  // console.log("안내: ",item.info)
+
                     return (
                       <Link to="/">
                         <Card key={idx}>
                           <Row>
                             <Col>
                             <Card.Body>
-                              <Card.Title sm={4}>{content}</Card.Title>
+                              <Card.Title sm={4}>{}</Card.Title>
                               <Card.Text sm={4}>
-                                <h5>서울시 관악구 정릉동</h5>
-                                cafeInfocafeInfocafeInfocafeInfocafeInfocafeInfo
+                                <h5>{}</h5>
+                                {}
                               </Card.Text>
                             </Card.Body>
                             </Col>
@@ -42,35 +52,7 @@ function CardArray() {
 
 function CafeList() {
   const [searchValue, setSearchValue] = useState(""); //검색값
-
-  const countries = [
-
-    { name: "Belgium", continent: "Europe" },
-    { name: "India", continent: "Asia" },
-    { name: "Bolivia", continent: "South America" },
-    { name: "Ghana", continent: "Africa" },
-    { name: "Japan", continent: "Asia" },
-    { name: "Canada", continent: "North America" },
-    { name: "New Zealand", continent: "Australasia" },
-    { name: "Italy", continent: "Europe" },
-    { name: "South Africa", continent: "Africa" },
-    { name: "China", continent: "Asia" },
-    { name: "Paraguay", continent: "South America" },
-    { name: "Usa", continent: "North America" },
-    { name: "France", continent: "Europe" },
-    { name: "Botswana", continent: "Africa" },
-    { name: "Spain", continent: "Europe" },
-    { name: "Senegal", continent: "Africa" },
-    { name: "Brazil", continent: "South America" },
-    { name: "Denmark", continent: "Europe" },
-    { name: "Mexico", continent: "South America" },
-    { name: "Australia", continent: "Australasia" },
-    { name: "Tanzania", continent: "Africa" },
-    { name: "Bangladesh", continent: "Asia" },
-    { name: "Portugal", continent: "Europe" },
-    { name: "Pakistan", continent: "Asia" },
-  
-  ];
+  const [dataArray, setDataArray] = useState([]);
 
   //검색창의 값이 바뀔 때마다 실행됨. (검색값 저장)
   const handleChange = (e) => {
@@ -95,26 +77,23 @@ function CafeList() {
         } else{
           let result = JSON.parse(response.data.search_result);
           console.log("json 결과!")
-          console.log(result)
+          console.log("첫번째 아이템", result.item0)
+          console.log("타입: ", Object.values(result))
+          setDataArray(result)
+          /*
+          dataArray = [
+          0: {name: 'cafe_A', location: 'Seoul, korea', info: 'Korea NO.1', owner: null},
+          1:{name: 'cafe_B', location: 'Incheon, korea', info: 'Korea NO.2', owner: null},
+          2:{name: 'cafe_C', location: 'Daejeon, korea', info: 'Korea NO.3', owner: null},
+          3:{name: 'cafe_D', location: 'Busan, korea', info: 'Korea NO.4', owner: null},
+          4:{name: 'cafe_E', location: 'Ulsan, korea', info: 'Korea No.5', owner: null}]
+          */
         }
-        //백엔드에서 response 받는 부분
-        //setUserPoint는 Point.jsx에서 인자로 넘어온 setter이므로, 얘로 userPoint값 바꾸면, 페이지가 자동 렌더링되며, Point.jsx에도 반영이 된다!!
-        // setUserPoint(response.data.current_point); 
-        // setUserChanged(true); //localstorage의 userInfo 객체의 Point를 업데이트 해야된다고 표시해둠! (이후 Point.jsx의 20번 라인에서 업데이트 됨)
       }).catch((err) => { 
         //에러 잡는 구문
         console.log("90번 줄 에러입니다 : ", err);
       });
-
-    // if(searchValue.length > 0) {
-    //   //일치하는 값 찾는 내용 (아마도 서버로)
-    //   countries.filter((country) => {
-    //     console.log(country.name.match(searchValue));
-    //     console.log('값은 : ', searchValue)
-    //   });
-    // }
   }
-
 
 
   return (
@@ -142,7 +121,7 @@ function CafeList() {
     </Container>
 
     {/* 카드 group */}
-    <CardArray></CardArray>
+    <CardArray dataArray={dataArray}></CardArray>
     </>
   );
 }
