@@ -8,7 +8,7 @@ import { Menu } from '../components';
 /* const cafeObj = { 
     'name': '카페123', 'location': '서울시 관악구 정릉동', 
     'detail': 'ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ', 
-    'phone': '010-1234-5678', 
+    XXX'phone': '010-1234-5678',XXX 
     'menu': [
         {'name': '카페라떼', 'price': '4000원'},
         {'name': '아메리카노', 'price': '3000원'},
@@ -64,7 +64,8 @@ function CafeDetail() {
                                     onClick={handleShowFullText}>{showFullText ? "닫기" : "...더보기"}</span>
                                 )}
                             </p>
-                            <p>{cafeObj.phone}</p>
+                            {/* <img src="/images/call.png" alt="알림버튼" style={{ width: "20px", height: "20px" }}/>
+                            <p>{cafeObj.phone}</p> */}
                         </div>
                     </div>
                 </Col>

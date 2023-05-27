@@ -42,7 +42,7 @@ const Menu = ({menuObj}) => {
               메뉴: {menuObj.name} <br />
               가격: {menuObj.price} <br />
               <br />
-              보유포인트: {userPoint}
+              현재 보유 중인 포인트: {userPoint}
           </Modal.Body>
           <Modal.Footer>
             <div>
