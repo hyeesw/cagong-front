@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router';
-import { Home, Signup, Signin, Point } from './pages';
+import { Home, Signup, Signin, Point, CafeList } from './pages';
 import { Header, Footer } from './components';
 
 function App() {
@@ -14,6 +14,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/point" element={<Point />} />
+          <Route path="/cafelist" element={<CafeList />} />
         </Routes>
       </div>
       <Footer />
