@@ -10,44 +10,53 @@ import { API_URL } from '../constants';
 
 function CardArray(dataArray) {
   console.log("---------시작----------")
+  
+  const key_list = Object.keys(dataArray.dataArray)
+  console.log("들어온 데이타: ", dataArray.dataArray)
+  console.log("키 리스트: ",key_list)
+  
+  for(let i=0; i<key_list.length; i++){
+    const key = key_list[i];
+    const value = dataArray.dataArray[key];
+    console.log("출력되자?^^",value)
+  }
+  // const [dataArray1, setDataArray] = useState(Object.values(dataArray));
+  // console.log("아이템: ",dataArray1)
+  // console.log("아이템: ",dataArray1[0])
 
-  const [dataArray1, setDataArray] = useState(Object.values(dataArray));
-  console.log("아이템: ",dataArray1)
-  console.log("아이템: ",dataArray1[0])
+  //   return(
+  //       <Container>
+  //           {
+  //                 dataArray1.length>0 && dataArray1.map((idx)=>{
+  //                 console.log(dataArray1[0])
+  //                 // console.log("이름: ", item.name)
+  //                 // console.log("위치: ",item.location)
+  //                 // console.log("안내: ",item.info)
 
-    return(
-        <Container>
-            {
-                  dataArray1.length>0 && dataArray1.map((idx)=>{
-                  console.log(dataArray1[0])
-                  // console.log("이름: ", item.name)
-                  // console.log("위치: ",item.location)
-                  // console.log("안내: ",item.info)
-
-                    return (
-                      <Link to="/">
-                        <Card key={idx}>
-                          <Row>
-                            <Col>
-                            <Card.Body>
-                              <Card.Title sm={4}>{}</Card.Title>
-                              <Card.Text sm={4}>
-                                <h5>{}</h5>
-                                {}
-                              </Card.Text>
-                            </Card.Body>
-                            </Col>
-                            <Col>
-                              <img src={require("./assets/point_1000.png")} width="90%" alt="img"/>
-                            </Col>
-                          </Row>
-                        </Card>
-                      </Link>
-                    )
-                })
-            }
-        </Container>
-    );
+  //                   return (
+  //                     <Link to="/">
+  //                       <Card key={idx}>
+  //                         <Row>
+  //                           <Col>
+  //                           <Card.Body>
+  //                             <Card.Title sm={4}>{}</Card.Title>
+  //                             <Card.Text sm={4}>
+  //                               <h5>{}</h5>
+  //                               {}
+  //                             </Card.Text>
+  //                           </Card.Body>
+  //                           </Col>
+  //                           <Col>
+  //                             <img src={require("./assets/point_1000.png")} width="90%" alt="img"/>
+  //                           </Col>
+  //                         </Row>
+  //                       </Card>
+  //                     </Link>
+  //                   )
+  //               })
+  //           }
+  //       </Container>
+  //   );
   }
 
 function CafeList() {
@@ -76,18 +85,8 @@ function CafeList() {
           console.log("검색 결과가 없습니다.")
         } else{
           let result = JSON.parse(response.data.search_result);
-          console.log("json 결과!")
-          console.log("첫번째 아이템", result.item0)
-          console.log("타입: ", Object.values(result))
-          setDataArray(result)
-          /*
-          dataArray = [
-          0: {name: 'cafe_A', location: 'Seoul, korea', info: 'Korea NO.1', owner: null},
-          1:{name: 'cafe_B', location: 'Incheon, korea', info: 'Korea NO.2', owner: null},
-          2:{name: 'cafe_C', location: 'Daejeon, korea', info: 'Korea NO.3', owner: null},
-          3:{name: 'cafe_D', location: 'Busan, korea', info: 'Korea NO.4', owner: null},
-          4:{name: 'cafe_E', location: 'Ulsan, korea', info: 'Korea No.5', owner: null}]
-          */
+          console.log("아니왜!!!!!!!!!!!!!!", result)
+          setDataArray(result) //객체가 저장됨
         }
       }).catch((err) => { 
         //에러 잡는 구문
