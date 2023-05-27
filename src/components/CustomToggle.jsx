@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 
 function CustomToggle({ children, onClick, className }) {
-
   const handleClick = (e) => {
     onClick(e);
   };

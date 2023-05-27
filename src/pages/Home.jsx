@@ -3,10 +3,9 @@ import { MyCalendar } from '../components';
 
 function Home() {
   return (
-    <>
-      <h2>홈페이지</h2>
+    <div className=" d-block">
       <MyCalendar />
-    </>
+    </div>
   );
 }
 
