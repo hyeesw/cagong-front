@@ -38,7 +38,9 @@ function MyProfile({ userInfo }) {
     e.preventDefault();
     alert('로그아웃 하시겠습니까?');
     removeUser();
-    navigate('/');
+    // navigate('/');
+    // eslint-disable-next-line no-restricted-globals
+    location.reload();
   };
 
   // 프로필 사진 자리에 들어갈 것

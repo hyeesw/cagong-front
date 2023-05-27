@@ -2,7 +2,11 @@ import React from 'react';
 import { MyCalendar } from '../components';
 
 function Home() {
-  return <MyCalendar />;
+  return (
+    <div className=" d-block">
+      <MyCalendar />
+    </div>
+  );
 }
 
 export default Home;

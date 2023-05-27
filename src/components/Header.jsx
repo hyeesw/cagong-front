@@ -4,7 +4,7 @@ import { Nav } from 'react-bootstrap';
 import { getUser } from '../util/localstorage';
 import CustomToggle from './CustomToggle'; // 커스텀 버튼을 생성하는 컴포넌트
 import MyProfile from './MyProfile';
-import './Header.css';
+import '../css/Header.css';
 
 function Header() {
   const userInfo = getUser();
