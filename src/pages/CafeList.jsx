@@ -33,7 +33,7 @@ function CardArray(parmData) {
             </Card.Body>
             </Col>
             <Col>
-              <img src={require("./assets/point_1000.png")} width="90%" alt="img"/>
+              {/* <img src={require("./assets/point_1000.png")} width="90%" alt="img"/>  //이미지가 들어갈 자리 */}
             </Col>
           </Row>
         </Card>
