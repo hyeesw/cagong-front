@@ -77,16 +77,19 @@ function MyCalendar() {
     }
   };
 
-  useEffect(() => {
-    const userInfo = getUser();
+  const init = async () => {
+    const userInfo = await getUser();
     if (!userInfo) {
       // console.log('회원정보가 없거나 토큰무효');
       alert('로그인이 필요합니다.');
       navigate('/signin');
       return;
     }
-
     getMarks(userInfo);
+  };
+
+  useEffect(() => {
+    init();
   }, []);
 
   return (
