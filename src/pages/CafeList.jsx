@@ -8,60 +8,49 @@ import axios from 'axios';
 import { API_URL } from '../constants';
 
 
-function CardArray(dataArray) {
-  console.log("---------시작----------")
-  
-  const key_list = Object.keys(dataArray.dataArray)
-  console.log("들어온 데이타: ", dataArray.dataArray)
-  console.log("키 리스트: ",key_list)
-  
-  for(let i=0; i<key_list.length; i++){
-    const key = key_list[i];
-    const value = dataArray.dataArray[key];
-    console.log("출력되자?^^",value)
-  }
-  // const [dataArray1, setDataArray] = useState(Object.values(dataArray));
-  // console.log("아이템: ",dataArray1)
-  // console.log("아이템: ",dataArray1[0])
+function CardArray(parmData) {
+  const data = parmData.parmData //꺼내기
 
-  //   return(
-  //       <Container>
-  //           {
-  //                 dataArray1.length>0 && dataArray1.map((idx)=>{
-  //                 console.log(dataArray1[0])
-  //                 // console.log("이름: ", item.name)
-  //                 // console.log("위치: ",item.location)
-  //                 // console.log("안내: ",item.info)
+  if(data.length== 0) {
+    console.log("빈 배열!")
+    return
+  } else{
+    const keyList = Object.keys(data)  //['0', '1', '2', '3', '4']
+    const valueList = Object.values(data)
+    console.log("배열 !!!",valueList)
 
-  //                   return (
-  //                     <Link to="/">
-  //                       <Card key={idx}>
-  //                         <Row>
-  //                           <Col>
-  //                           <Card.Body>
-  //                             <Card.Title sm={4}>{}</Card.Title>
-  //                             <Card.Text sm={4}>
-  //                               <h5>{}</h5>
-  //                               {}
-  //                             </Card.Text>
-  //                           </Card.Body>
-  //                           </Col>
-  //                           <Col>
-  //                             <img src={require("./assets/point_1000.png")} width="90%" alt="img"/>
-  //                           </Col>
-  //                         </Row>
-  //                       </Card>
-  //                     </Link>
-  //                   )
-  //               })
-  //           }
-  //       </Container>
-  //   );
+    const tags = valueList.map((item, idx) => (
+        <Link to="/">
+        <Card key={idx}>
+          <Row>
+            <Col>
+            <Card.Body>
+              <Card.Title sm={4}>{item.name}</Card.Title>
+              <Card.Text sm={4}>
+                <h5>{item.location}</h5>
+                {item.info}
+              </Card.Text>
+            </Card.Body>
+            </Col>
+            <Col>
+              <img src={require("./assets/point_1000.png")} width="90%" alt="img"/>
+            </Col>
+          </Row>
+        </Card>
+      </Link>
+    ))
+    
+    return(
+      <Container>
+        {tags}
+      </Container>
+    );
   }
+}
 
 function CafeList() {
   const [searchValue, setSearchValue] = useState(""); //검색값
-  const [dataArray, setDataArray] = useState([]);
+  const [searchedList, setSearchedList] = useState([]);
 
   //검색창의 값이 바뀔 때마다 실행됨. (검색값 저장)
   const handleChange = (e) => {
@@ -84,9 +73,8 @@ function CafeList() {
         if(response.data.search_result === "null") {
           console.log("검색 결과가 없습니다.")
         } else{
-          let result = JSON.parse(response.data.search_result);
-          console.log("아니왜!!!!!!!!!!!!!!", result)
-          setDataArray(result) //객체가 저장됨
+          let jsonResult = JSON.parse(response.data.search_result);
+          setSearchedList(jsonResult) //객체가 저장됨
         }
       }).catch((err) => { 
         //에러 잡는 구문
@@ -120,7 +108,9 @@ function CafeList() {
     </Container>
 
     {/* 카드 group */}
-    <CardArray dataArray={dataArray}></CardArray>
+    {/* <Container> */}
+      <CardArray parmData={searchedList}></CardArray>
+    {/* </Container>     */}
     </>
   );
 }
