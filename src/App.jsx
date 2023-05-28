@@ -8,14 +8,14 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <div style={{ overflowX: 'hidden' }}>
+      <div style={{ overflowX: 'hidden', marginBottom: '70px' }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/point" element={<Point />} />
           <Route path="/cafelist" element={<CafeList />} />
-          <Route path="/cafelist/detail/:cafe_id" element={<CafeDetail />} />
+          <Route path="/cafelist/detail/:cafeId" element={<CafeDetail />} />
         </Routes>
       </div>
       <Footer />
