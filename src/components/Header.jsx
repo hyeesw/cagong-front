@@ -7,8 +7,14 @@ import MyProfile from './MyProfile';
 import '../css/Header.css';
 
 function Header() {
-  const userInfo = getUser();
+  let userInfo;
   const navigate = useNavigate(); // !!!없애면 안됨!!!
+
+  const init = async () => {
+    userInfo = await getUser();
+  };
+
+  init();
 
   return (
     <Nav defaultActiveKey="link-0" className="header">
