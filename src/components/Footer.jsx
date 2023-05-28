@@ -18,7 +18,11 @@ function Footer() {
 
       {/* 카페 페이지: 링크 추가해주기!!! */}
       <Nav.Item>
-        <CustomToggle className="footer-button" onClick={() => navigate('/cafelist/')} eventKey="link-1">
+        <CustomToggle
+          className="footer-button"
+          onClick={() => navigate('/cafelist')}
+          eventKey="link-1"
+        >
           cafe
         </CustomToggle>
       </Nav.Item>
