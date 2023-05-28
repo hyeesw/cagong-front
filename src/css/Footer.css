@@ -2,9 +2,10 @@
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background-color: transparent;
-  padding: 15px 250px; /* 세로방향 가로방향 */
+  justify-content: center;
+  gap: 72px;
+  background-color: white;
+  padding: 15px 0; /* 세로방향 가로방향 */
   border-top: 1px solid #ccc; /* 아래에 테두리 추가 */
   position: fixed;
   bottom: 0;
@@ -13,8 +14,8 @@
 }
 
 .footer-button {
-  width: 65px;
-  height: 65px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   background-color: lightgrey;
   color: black;
