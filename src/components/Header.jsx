@@ -1,20 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 import { getUser } from '../util/localstorage';
-import CustomToggle from './CustomToggle'; // 커스텀 버튼을 생성하는 컴포넌트
+import CustomToggle from './CustomToggle';
 import MyProfile from './MyProfile';
 import '../css/Header.css';
 
 function Header() {
-  let userInfo;
-  const navigate = useNavigate(); // !!!없애면 안됨!!!
+  const navigate = useNavigate();
 
-  const init = async () => {
-    userInfo = await getUser();
-  };
+  const [userInfo, setUserInfo] = useState(null);
 
-  init();
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      const user = await getUser();
+      setUserInfo(user);
+    };
+    fetchUserInfo();
+  }, []);
 
   return (
     <Nav defaultActiveKey="link-0" className="header">

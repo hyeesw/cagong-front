@@ -62,6 +62,7 @@ function SigninForm() {
       const user = { ...response.data.user };
       localStorage.setItem('userInfo', JSON.stringify(user));
       navigate(`/`);
+      location.reload();
     } catch {
       alert('로그인 실패. 입력정보가 올바른지 확인하세요');
     }
