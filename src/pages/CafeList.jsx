@@ -20,7 +20,7 @@ function CardArray(parmData) {
 
     // localhost:3000/cafelist/detail/1 호출
     const tags = valueList.map((item, idx) => (
-        <Link to={`detail/${item.id}/`}> 
+        <Link to={`cafe/detail/${item.id}/`}> 
         <Card key={idx}>
           <Row>
             <Col>
