@@ -15,12 +15,12 @@ function CardArray(parmData) {
     console.log("빈 배열!")
     return
   } else{
-    const keyList = Object.keys(data)  //['0', '1', '2', '3', '4']
     const valueList = Object.values(data)
     console.log("배열 !!!",valueList)
 
+    // localhost:3000/cafelist/detail/1 호출
     const tags = valueList.map((item, idx) => (
-        <Link to="/">
+        <Link to={`detail/${item.id}/`}> 
         <Card key={idx}>
           <Row>
             <Col>
