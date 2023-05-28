@@ -9,16 +9,17 @@
 }
 
 .header-search {
-  flex: 1;
+  /* flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 20px;
+  margin: 0 20px; */
+  width: 400px;
 }
 
 .header-button {
-  width: 50px;
-  height: 50px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   background-color: lightgrey;
   color: black;
@@ -38,8 +39,8 @@
 }
 
 .header-profile {
-  width: 50px;
-  height: 50px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   display: flex;
   align-items: center; /* 수직방향 가운데 정렬 */

@@ -27,14 +27,13 @@ function Header() {
           <img
             src="/images/header-logo-no-background.png"
             alt="Home Button"
-            style={{ width: '180px', height: '60px' }}
+            style={{ height: '50px' }}
           />
         </Nav.Link>
       </Nav.Item>
 
       {/* 검색 */}
       <Nav.Item className="header-search">(검색 창 들어갈 자리)</Nav.Item>
-
       {/* 포인트 페이지 */}
       <Nav.Item>
         <CustomToggle
@@ -45,7 +44,6 @@ function Header() {
           포인트
         </CustomToggle>
       </Nav.Item>
-
       {/* 프로필 */}
       <Nav.Item className="header-profile">
         <MyProfile userInfo={userInfo} />
