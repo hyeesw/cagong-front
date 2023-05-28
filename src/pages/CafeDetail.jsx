@@ -57,7 +57,7 @@ function CafeDetail() {
             <div style={{ textAlign: 'center' }}>
               <div
                 style={{
-                  width: '100%',
+                  width: '80%',
                   aspectRatio: '1/1',
                   backgroundColor: 'lightgrey',
                   margin: '30px auto',
