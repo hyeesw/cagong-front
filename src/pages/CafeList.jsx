@@ -11,11 +11,11 @@ function CardArray(parmData) {
   const data = parmData.parmData; //꺼내기
 
   if (data.length == 0) {
-    console.log('빈 배열!');
+    // console.log('빈 배열!');
     return;
   } else {
     const valueList = Object.values(data);
-    console.log('배열 !!!', valueList);
+    // console.log('배열 !!!', valueList);
 
     // localhost:3000/cafelist/detail/1 호출
     const tags = valueList.map((item, idx) => (
@@ -50,15 +50,15 @@ function CafeList() {
   //검색창의 값이 바뀔 때마다 실행됨. (검색값 저장)
   const handleChange = (e) => {
     e.preventDefault();
-    console.log('handleChange() 불려짐');
+    // console.log('handleChange() 불려짐');
     setSearchValue(e.target.value);
   };
 
   //[검색] 버튼 눌렀을 때 handleClick() 실행됨. (데이터 전송)
-  const handleClick = async (e) => {
+  const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    console.log('handleClick() 불려짐');
-    console.log(searchValue);
+    // console.log('handleClick() 불려짐');
+    // console.log(searchValue);
     await axios //axios로 서버에 요청 보내는 부분 시작!
       .post(`${API_URL}cafe_list/`, {
         //백엔드의 url 요청과 보낼 data 객체
@@ -75,8 +75,7 @@ function CafeList() {
         }
       })
       .catch((err) => {
-        //에러 잡는 구문
-        console.log('90번 줄 에러입니다 : ', err);
+        console.log('axios post cafe_list', err);
       });
   };
 
@@ -86,7 +85,7 @@ function CafeList() {
       <Container className="mt-5">
         <Row>
           <Col>
-            <Form className="d-flex">
+            <Form className="d-flex" onSubmit={handleSearchSubmit}>
               <Form.Control
                 type="search"
                 placeholder="Search"
@@ -96,12 +95,7 @@ function CafeList() {
                 onChange={handleChange}
                 value={searchValue}
               />
-              <Button
-                type="submit"
-                className="rounded-pill"
-                variant="outline-primary"
-                onClick={handleClick}
-              >
+              <Button type="submit" className="rounded-pill" variant="outline-primary">
                 Search
               </Button>
             </Form>

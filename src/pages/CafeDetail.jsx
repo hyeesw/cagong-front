@@ -18,8 +18,8 @@ function CafeDetail() {
     const result = await axios // axios로 서버에 요청 보내는 부분 시작!
       .post(`${API_URL}cafe/detail/${cafeId}/`)
       .then((response) => {
-        console.log('cafe_detail', response.data.cafe_detail);
-        console.log('menu_list', response.data.menu_list);
+        // console.log('cafe_detail', response.data.cafe_detail);
+        // console.log('menu_list', response.data.menu_list);
         setcafeObj(JSON.parse(response.data.cafe_detail));
         setmenus([...response.data.menu_list]);
       })
@@ -44,10 +44,6 @@ function CafeDetail() {
   useEffect(() => {
     init();
   }, []);
-
-  useEffect(() => {
-    console.log(menus, cafeObj);
-  }, [menus, cafeObj]);
 
   return (
     <Container fluid>

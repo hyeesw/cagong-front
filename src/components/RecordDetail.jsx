@@ -34,9 +34,9 @@ function RecordDetail({ value, records }) {
     });
   }, [value]);
 
-  useEffect(() => {
-    console.log(detail);
-  }, [detail]);
+  // useEffect(() => {
+  //   console.log(detail);
+  // }, [detail]);
 
   return (
     <CardGroup>
