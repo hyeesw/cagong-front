@@ -14,8 +14,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/point" element={<Point />} />
-          <Route path="/cafelist" element={<CafeList />} />
-          <Route path="/cafelist/detail/:cafeId" element={<CafeDetail />} />
+          <Route path="/cafe" element={<CafeList />} />
+          <Route path="/cafe/detail/:cafeId" element={<CafeDetail />} />
         </Routes>
       </div>
       <Footer />
