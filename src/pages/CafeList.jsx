@@ -11,22 +11,18 @@ function CardArray(parmData) {
   const data = parmData.parmData; //꺼내기
 
   if (data.length == 0) {
-    // console.log('빈 배열!');
     return;
   } else {
     const valueList = Object.values(data);
-    // console.log('배열 !!!', valueList);
-
-    // localhost:3000/cafelist/detail/1 호출
     const tags = valueList.map((item, idx) => (
-      <Link to={`/cafelist/detail/${item.id}/`}>
+      <Link to={`/cafe/detail/${item.id}/`}>
         <Card key={idx}>
           <Row>
             <Col>
               <Card.Body>
                 <Card.Title sm={4}>{item.name}</Card.Title>
                 <Card.Text sm={4}>
-                  <span>{item.location}</span>
+                  <p>{item.location}</p>
                   {item.info}
                 </Card.Text>
               </Card.Body>
@@ -50,29 +46,20 @@ function CafeList() {
   //검색창의 값이 바뀔 때마다 실행됨. (검색값 저장)
   const handleChange = (e) => {
     e.preventDefault();
-    // console.log('handleChange() 불려짐');
     setSearchValue(e.target.value);
   };
 
   //[검색] 버튼 눌렀을 때 handleClick() 실행됨. (데이터 전송)
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    // console.log('handleClick() 불려짐');
-    // console.log(searchValue);
     await axios //axios로 서버에 요청 보내는 부분 시작!
-      .post(`${API_URL}cafe_list/`, {
+      .post(`${API_URL}cafe/`, {
         //백엔드의 url 요청과 보낼 data 객체
         search_value: searchValue,
       })
       .then((response) => {
-        console.log(response.data.search_result);
-
-        if (response.data.search_result === 'null') {
-          console.log('검색 결과가 없습니다.');
-        } else {
-          let jsonResult = JSON.parse(response.data.search_result);
-          setSearchedList(jsonResult); //객체가 저장됨
-        }
+        console.log(response.data);
+        setSearchedList([...response.data.cafe_list]);
       })
       .catch((err) => {
         console.log('axios post cafe_list', err);
