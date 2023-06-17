@@ -1,6 +1,7 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { Card, CardGroup } from 'react-bootstrap';
+import { RecordTimer } from '../components';
 
 // records 필드: date, user, duration, start, end, memo
 
@@ -44,13 +45,21 @@ function RecordDetail({ value, records }) {
         <Card.Body>
           <Card.Title>
             <div style={{ fontSize: '18px' }}>{detail.date}</div>
-            {detail.duration ? (
-              <div style={{ fontSize: '40px', fontWeight: 'bold', color: 'mediumpurple' }}>
-                {detail.duration}
-              </div>
-            ) : (
-              <div style={{ fontSize: '40px', fontWeight: 'bold', color: 'grey' }}>00:00:00</div>
-            )}
+            {(() => {
+              if (detail.duration) {
+                if (detail.duration === '00:00:00') {
+                  return <RecordTimer detail={detail} />;
+                }
+                return (
+                  <div style={{ fontSize: '40px', fontWeight: 'bold', color: 'mediumpurple' }}>
+                    {detail.duration}
+                  </div>
+                );
+              }
+              return (
+                <div style={{ fontSize: '40px', fontWeight: 'bold', color: 'grey' }}>00:00:00</div>
+              );
+            })()}
           </Card.Title>
           <Card.Subtitle>
             <div style={{ fontWeight: 'lighter', color: 'grey' }}>
