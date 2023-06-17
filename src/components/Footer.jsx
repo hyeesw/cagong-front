@@ -20,7 +20,7 @@ function Footer() {
       <Nav.Item>
         <CustomToggle
           className="footer-button"
-          onClick={() => navigate('/cafelist')}
+          onClick={() => navigate('/cafe')}
           eventKey="link-1"
         >
           cafe
