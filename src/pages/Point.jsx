@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
+
+// 백엔드에 필요한 것들
+import axios from 'axios';
+import { API_URL } from '../constants';
 import { PointForm } from '../components';
+import { getCookie } from '../util/cookie';
+
 
 function Point() {
   const userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
   const navigate = useNavigate();
+
+  const [userName, setUserName] = useState(-1); // 유저 이름
+  const [userId, setUserId] = useState(userInfo.userID); // 유저 id
+  const [userPoint, setUserPoint] = useState(-1); // 유저 point
+
 
   // 로그인 안한 유저의 경우
   if (userInfo == null) {
@@ -16,17 +27,31 @@ function Point() {
     return;
   }
 
-  const userName = userInfo.username; // 유저 이름
-  const userId = userInfo.user_id; // 유저 ID
-  const [userPoint, setUserPoint] = useState(userInfo.point); // 유저 point
-  const [userChanged, setUserChanged] = useState(false); // localsotrage에 반영하기 위함
-
-  // localstorage에 userInfo 객체 다시 등록 (변경사항이 있으므로)
-  if (userChanged) {
-    userInfo.point = userPoint; // 새로운 userPoint로 업데이트 하기
-    window.localStorage.removeItem('userInfo');
-    window.localStorage.setItem('userInfo', JSON.stringify(userInfo));
+  const getUserDB = async (userID) => {
+    await axios // axios로 서버에 요청 보내는 부분 시작!
+      .post(
+        `${API_URL}get_user/`,
+        {
+          // 백엔드의 url 요청과 보낼 data 객체
+          user_id: userID,
+        },
+        {
+          headers: { Authorization: `Bearer ${getCookie('access_token')}` },
+        },
+      )
+      .then((response) => {
+        setUserName(response.data.username)
+        setUserPoint(response.data.point)
+      })
+      .catch((err) => {
+        console.log('Point.jsx userDB 가져오기 실패 : ', err);
+      });
   }
+  //최소 렌더링시에 1번만 실행됨
+  useEffect(()=>{
+    getUserDB(userInfo.userID)
+  }, [])
+
 
   return (
     <>
@@ -45,7 +70,6 @@ function Point() {
         userID={userId}
         userPoint={userPoint}
         setUserPoint={setUserPoint}
-        setUserChanged={setUserChanged}
       />
     </>
   );

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/esm/Button';
@@ -12,7 +12,32 @@ import { getCookie } from '../util/cookie';
 //Menu는 단일 객체임. (여러 객체가 담긴게 아님.)
 const Menu = ({ menuObj }) => {
   const userInfo = JSON.parse(window.localStorage.getItem('userInfo')); // 로그인한 유저 객체
-  const userPoint = userInfo.point; // 유저포인트
+  const [userPoint, setUserPoint] = useState(0); // 선택된 포인트
+
+  const getUserDB = async (userID) => {
+    await axios // axios로 서버에 요청 보내는 부분 시작!
+      .post(
+        `${API_URL}get_user/`,
+        {
+          // 백엔드의 url 요청과 보낼 data 객체
+          user_id: userID,
+        },
+        {
+          headers: { Authorization: `Bearer ${getCookie('access_token')}` },
+        },
+      )
+      .then((response) => {
+        setUserPoint(response.data.point)
+      })
+      .catch((err) => {
+        console.log('Menu.jsx userDB 가져오기 실패 : ', err);
+      });
+  }
+  //최소 렌더링시에 1번만 실행됨
+  useEffect(()=>{
+    getUserDB(userInfo.userID)
+  }, [])
+
 
   console.log('메뉴 객체 : ',menuObj);
   console.log(menuObj.name);
@@ -37,7 +62,7 @@ const Menu = ({ menuObj }) => {
         `${API_URL}order/`,
         {
           // 백엔드의 url 요청과 보낼 data 객체
-          user_id: userInfo.id,
+          user_id: userInfo.userID,
           menu_id: menu_id,
         },
         {
@@ -46,6 +71,7 @@ const Menu = ({ menuObj }) => {
       )
       .then((response) => {
         console.log('response를 받았습니다 !', response.data);
+        setUserPoint(response.data.renewed_point) //화면상에서 보여지는 point 값 수정
       })
       .catch((err) => {
         console.log('46번줄 err : ', err);
