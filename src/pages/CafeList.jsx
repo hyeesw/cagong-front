@@ -15,15 +15,14 @@ function CardArray(parmData) {
   } else {
     const valueList = Object.values(data);
     const tags = valueList.map((item, idx) => (
-      <Link to={`/cafe/detail/${item.id}/`}>
-        <Card key={idx}>
+      <Link to={`/cafe/detail/${item.id}/`} style={{ textDecoration: 'none' }}>
+        <Card key={idx} >
           <Row>
             <Col>
               <Card.Body>
-                <Card.Title sm={4}>{item.name}</Card.Title>
+                <Card.Title sm={4} style={{ color: 'mediumPurple', fontSize: '22px', textDecoration: 'underline' }}>{item.name}</Card.Title>
                 <Card.Text sm={4}>
-                  <p>{item.location}</p>
-                  {item.info}
+                  <p style={{color: 'grey'}}>{item.location} | {item.info}</p>
                 </Card.Text>
               </Card.Body>
             </Col>
@@ -89,7 +88,7 @@ function CafeList() {
           </Col>
         </Row>
       </Container>
-
+      <br/>
       {/* 카드 group */}
       {/* <Container> */}
       <CardArray parmData={searchedList}></CardArray>
