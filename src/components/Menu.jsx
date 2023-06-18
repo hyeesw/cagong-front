@@ -70,7 +70,7 @@ const Menu = ({ menuObj }) => {
               <Button
                 variant="primary"
                 type="submit"
-                onClick={() => alert('주문완료!')}
+                onClick={() => {alert('주문완료!'); handleCloseOrderModal();}}
                 style={{ marginRight: '10px' }}
               >
                 주문하기
