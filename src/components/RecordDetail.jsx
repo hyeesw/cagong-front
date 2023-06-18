@@ -70,7 +70,10 @@ function RecordDetail({ value, records }) {
           </Card.Title>
           <Card.Subtitle>
             <div style={{ fontWeight: 'lighter', color: 'grey' }}>
-              {moment(detail.start).format('a h:mm:ss')} ~ {moment(detail.end).format('a h:mm:ss')}
+              {detail.start
+                ? `${moment(detail.start).format('a h:mm:ss')} ~ 
+                ${moment(detail.end).format('a h:mm:ss')}`
+                : null}
             </div>
           </Card.Subtitle>
         </Card.Body>

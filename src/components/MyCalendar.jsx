@@ -104,7 +104,7 @@ function MyCalendar() {
             // showNeighboringMonth={false} //  이전, 이후 달의 날짜는 보이지 않도록 설정
             tileContent={({ date, view }) => dot(date, view, mark, duration)}
           />
-          <div className="text-gray-500 mt-4">{moment(value).format('YYYY년 MM월 DD일')}</div>
+          {/* <div className="text-gray-500 mt-4">{moment(value).format('YYYY년 MM월 DD일')}</div> */}
         </div>
       </Col>
       <Col md="auto">
