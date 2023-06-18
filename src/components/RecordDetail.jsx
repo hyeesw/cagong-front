@@ -12,6 +12,7 @@ import { RecordTimer } from '../components';
 
 function RecordDetail({ value, records }) {
   const [detail, setdetail] = useState({});
+  const [isTimerRunning, setTimerRunning] = useState(false);
 
   // console.log('value', moment(value).format('YYYY-MM-DD'), 'records', { ...records[0] }.date);
 
@@ -24,8 +25,8 @@ function RecordDetail({ value, records }) {
         setdetail({
           date: moment(value).format('YYYY-MM-DD'),
           duration: record.duration.split('.')[0],
-          start: moment(record.start).format('a h:mm:ss'),
-          end: moment(record.end).format('a h:mm:ss'),
+          start: record.start,
+          end: record.end,
           memo: record.memo,
         });
       }
@@ -35,9 +36,9 @@ function RecordDetail({ value, records }) {
     });
   }, [value]);
 
-  // useEffect(() => {
-  //   console.log(detail);
-  // }, [detail]);
+  useEffect(() => {
+    setTimerRunning(detail.duration === '00:00:00');
+  }, [detail]);
 
   return (
     <CardGroup>
@@ -47,8 +48,14 @@ function RecordDetail({ value, records }) {
             <div style={{ fontSize: '18px' }}>{detail.date}</div>
             {(() => {
               if (detail.duration) {
-                if (detail.duration === '00:00:00') {
-                  return <RecordTimer detail={detail} />;
+                if (isTimerRunning) {
+                  return (
+                    <RecordTimer
+                      detail={detail}
+                      isTimerRunning={isTimerRunning}
+                      setTimerRunning={setTimerRunning}
+                    />
+                  );
                 }
                 return (
                   <div style={{ fontSize: '40px', fontWeight: 'bold', color: 'mediumpurple' }}>
@@ -63,7 +70,7 @@ function RecordDetail({ value, records }) {
           </Card.Title>
           <Card.Subtitle>
             <div style={{ fontWeight: 'lighter', color: 'grey' }}>
-              {detail.start} ~ {detail.end}
+              {moment(detail.start).format('a h:mm:ss')} ~ {moment(detail.end).format('a h:mm:ss')}
             </div>
           </Card.Subtitle>
         </Card.Body>
