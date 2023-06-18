@@ -7,3 +7,4 @@ export { default as Menu } from './Menu';
 export { default as MyCalendar } from './MyCalendar';
 export { default as PointForm } from './PointForm';
 export { default as RecordDetail } from './RecordDetail';
+export { default as RecordTimer } from './RecordTimer';
