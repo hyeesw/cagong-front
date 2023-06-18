@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Dropdown from 'react-bootstrap/Dropdown';
-import Offcanvas from 'react-bootstrap/Offcanvas';
 import { removeUser } from '../util/localstorage';
 import CustomToggle from './CustomToggle'; // 커스텀 버튼을 생성하는 컴포넌트
-import Push from './Push'; // 푸쉬알림 정보가 담길 임시 컴포넌트
+import PushOffcanvas from './PushOffcanvas';
 
 function MyProfile({ userInfo }) {
   const navigate = useNavigate();
@@ -175,18 +174,7 @@ function MyProfile({ userInfo }) {
           )}
         </Dropdown.Menu>
       </Dropdown>
-
-      <Offcanvas show={showOffcanvas} onHide={handleCloseOffcanvas} placement="end">
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title style={{ fontSize: '26px' }}>알림</Offcanvas.Title>
-        </Offcanvas.Header>
-
-        <Offcanvas.Body>
-          <Push />
-          <Push />
-          <Push />
-        </Offcanvas.Body>
-      </Offcanvas>
+      <PushOffcanvas showOffcanvas={showOffcanvas} handleCloseOffcanvas={handleCloseOffcanvas} />
     </>
   );
 }
