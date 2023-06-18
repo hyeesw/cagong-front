@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'react-bootstrap';
+import { IoIosCall } from "react-icons/io";
 import axios from 'axios';
 import { API_URL } from '../constants';
 import { Menu } from '../components';
@@ -68,12 +69,8 @@ function CafeDetail() {
               >
                 {cafeObj.info}
               </p>
-              <img
-                src="/images/call.png"
-                alt="알림버튼"
-                style={{ width: '20px', height: '20px' }}
-              />
-              <p>{cafeObj.phone}</p>
+              {cafeObj.phone && <IoIosCall size="20" style={{marginRight: '2px'}}/>}
+              <span>{cafeObj.phone}</span>
             </div>
           </div>
         </Col>
