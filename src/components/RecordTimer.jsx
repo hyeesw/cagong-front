@@ -52,7 +52,7 @@ function RecordTimer({ detail, isTimerRunning, setTimerRunning }) {
       try {
         const response = await axios.put(
           `${API_URL}record/done`,
-          { detail_id: detail.id },
+          { record_id: detail.id },
           { headers: { Authorization: `Bearer ${getCookie('access_token')}` } },
         );
         console.log('POST 요청 결과:', response);
