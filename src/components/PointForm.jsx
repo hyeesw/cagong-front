@@ -90,10 +90,10 @@ function PointForm({ userID, userPoint, setUserPoint, setUserChanged }) {
           <p>충전 후 포인트 : {parseInt(userPoint, 10) + selectedPoint}</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handlePayment}>
+          <Button variant="primary" onClick={handlePayment}>
             결제하기
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleClose}>
             닫기
           </Button>
         </Modal.Footer>

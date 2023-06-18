@@ -38,7 +38,7 @@ const Menu = ({ menuObj }) => {
         <div style={{ aspectRatio: '1/1', backgroundColor: 'lightgrey' }}></div>
         <Card.Body>
           <Card.Title style={{ fontSize: '18px' }}>{menuObj.name}</Card.Title>
-          <Card.Text style={{ fontSize: '16px', color: 'mediumpurple' }}>{menuObj.price}</Card.Text>
+          <Card.Text style={{ fontSize: '16px', color: 'mediumpurple' }}>{menuObj.price}원</Card.Text>
         </Card.Body>
       </Card>
       <button
@@ -61,7 +61,7 @@ const Menu = ({ menuObj }) => {
           </Modal.Header>
           <Modal.Body style={{ display: 'flex' }}>
             메뉴: {menuObj.name} <br />
-            가격: {menuObj.price} <br />
+            가격: {menuObj.price}원 <br />
             <br />
             현재 보유 중인 포인트: {userPoint}
           </Modal.Body>
