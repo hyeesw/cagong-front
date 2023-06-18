@@ -50,10 +50,11 @@ function RecordTimer({ detail, isTimerRunning, setTimerRunning }) {
     if (stop && isTimerRunning) {
       setTimerRunning(false);
       try {
-        const response = await axios 
-          .post(`${API_URL}record/detail2/${detail.id}`, 
-          {},
-          { headers: { Authorization: `Bearer ${getCookie('access_token')}` } })
+        const response = await axios.put(
+          `${API_URL}record/done`,
+          { detail_id: detail.id },
+          { headers: { Authorization: `Bearer ${getCookie('access_token')}` } },
+        );
         console.log('POST 요청 결과:', response);
         location.reload();
       } catch (error) {
