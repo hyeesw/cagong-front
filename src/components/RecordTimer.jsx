@@ -1,6 +1,11 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { GrPause } from 'react-icons/gr';
+
+import { API_URL } from '../constants';
+import { getCookie } from '../util/cookie';
+
 
 function RecordTimer({ detail, isTimerRunning, setTimerRunning }) {
   const [timer, settimer] = useState();
@@ -41,11 +46,21 @@ function RecordTimer({ detail, isTimerRunning, setTimerRunning }) {
     return () => clearInterval(id);
   }, []);
 
-  const handleButtonPauseClick = () => {
+  const handleButtonPauseClick = async (e) => {
     const stop = confirm('기록을 종료합니다.');
     if (stop && isTimerRunning) {
       setTimerRunning(false);
-      location.reload();
+      try {
+        const response = await axios 
+          .post(`${API_URL}record/detail/${detail.id}`, 
+          { /* 요청 데이터 */ },
+          { headers: { Authorization: `Bearer ${getCookie('access_token')}` } })
+        console.log('POST 요청 결과:', response);
+        location.reload();
+      } catch (error) {
+        console.error('POST 요청 에러:', error);
+        // 에러 처리
+      }
     }
   };
 

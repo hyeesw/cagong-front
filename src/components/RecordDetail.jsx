@@ -23,6 +23,7 @@ function RecordDetail({ value, records }) {
         // console.log('same!!', 'record:', record);
         isChanged = true;
         setdetail({
+          id: record.id,
           date: moment(value).format('YYYY-MM-DD'),
           duration: record.duration.split('.')[0],
           start: record.start,
