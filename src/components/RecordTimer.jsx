@@ -6,7 +6,6 @@ import { GrPause } from 'react-icons/gr';
 import { API_URL } from '../constants';
 import { getCookie } from '../util/cookie';
 
-
 function RecordTimer({ detail, isTimerRunning, setTimerRunning }) {
   const [timer, settimer] = useState();
 
@@ -52,8 +51,8 @@ function RecordTimer({ detail, isTimerRunning, setTimerRunning }) {
       setTimerRunning(false);
       try {
         const response = await axios 
-          .post(`${API_URL}record/detail/${detail.id}`, 
-          { /* 요청 데이터 */ },
+          .post(`${API_URL}record/detail2/${detail.id}`, 
+          {},
           { headers: { Authorization: `Bearer ${getCookie('access_token')}` } })
         console.log('POST 요청 결과:', response);
         location.reload();
