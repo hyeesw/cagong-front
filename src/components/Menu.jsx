@@ -4,11 +4,17 @@ import Card from 'react-bootstrap/Card';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/esm/Button';
 
+// 백엔드에 필요한 것들
+import axios from 'axios';
+import { API_URL } from '../constants';
+import { getCookie } from '../util/cookie';
+
+//Menu는 단일 객체임. (여러 객체가 담긴게 아님.)
 const Menu = ({ menuObj }) => {
   const userInfo = JSON.parse(window.localStorage.getItem('userInfo')); // 로그인한 유저 객체
   const userPoint = userInfo.point; // 유저포인트
 
-  console.log(menuObj);
+  console.log('메뉴 객체 : ',menuObj);
   console.log(menuObj.name);
 
   const [showOrderModal, setShowOrderModal] = useState(false);
@@ -20,6 +26,31 @@ const Menu = ({ menuObj }) => {
   const handleCloseOrderModal = () => {
     setShowOrderModal(false);
   };
+
+  // [주문하기] 눌렀을 때 sendRequest() 실행됨. 
+  const sendRequest = async (menu_id) => {
+    console.log('여기까지 왔습니다.')
+    console.log(menu_id);
+
+    await axios // axios로 서버에 요청 보내는 부분 시작!
+      .post(
+        `${API_URL}order/`,
+        {
+          // 백엔드의 url 요청과 보낼 data 객체
+          user_id: userInfo.id,
+          menu_id: menu_id,
+        },
+        {
+          headers: { Authorization: `Bearer ${getCookie('access_token')}` },
+        },
+      )
+      .then((response) => {
+        console.log('response를 받았습니다 !', response.data);
+      })
+      .catch((err) => {
+        console.log('46번줄 err : ', err);
+      });
+  }
 
   return (
     <div>
@@ -51,7 +82,7 @@ const Menu = ({ menuObj }) => {
         }}
         onClick={handleShowOrderModal}
       >
-        주문하기
+        선택하기
       </button>
 
       {showOrderModal && ( // showOrderModal 상태에 따라 모달 창 렌더링
@@ -70,7 +101,7 @@ const Menu = ({ menuObj }) => {
               <Button
                 variant="primary"
                 type="submit"
-                onClick={() => alert('주문완료!')}
+                onClick={() => {alert('주문완료!'); handleCloseOrderModal(); sendRequest(menuObj.id);}}
                 style={{ marginRight: '10px' }}
               >
                 주문하기
