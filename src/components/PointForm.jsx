@@ -5,10 +5,9 @@ import { Card, CardGroup, Button, Modal } from 'react-bootstrap';
 // 백엔드에 필요한 것들
 import axios from 'axios';
 import { API_URL } from '../constants';
-
 import { getCookie } from '../util/cookie';
 
-function PointForm({ userID, userPoint, setUserPoint, setUserChanged }) {
+function PointForm({ userID, userPoint, setUserPoint }) {
   const [show, setShow] = useState(false); // 모달 show, close 상태
   const [selectedPoint, setSelectedPoint] = useState(0); // 선택된 포인트
 
@@ -39,7 +38,6 @@ function PointForm({ userID, userPoint, setUserPoint, setUserChanged }) {
       .then((response) => {
         // setUserPoint는 Point.jsx에서 인자로 넘어온 setter이므로, 얘로 userPoint값 바꾸면, 페이지가 자동 렌더링되며, Point.jsx에도 반영이 된다!!
         setUserPoint(response.data.current_point);
-        setUserChanged(true); // localstorage의 userInfo 객체의 Point를 업데이트 해야된다고 표시해둠! (이후 Point.jsx의 20번 라인에서 업데이트 됨)
       })
       .catch((err) => {
         console.log('포인트 충전 post err : ', err);
