@@ -4,7 +4,6 @@ import { Form, Button } from 'react-bootstrap';
 
 import axios from 'axios';
 import { API_URL } from '../constants';
-
 import { setCookie } from '../util/cookie';
 
 function SigninForm() {
@@ -27,14 +26,6 @@ function SigninForm() {
     get();
   }, []);
 
-  // useEffect(() => {
-  //   console.log(userId, password);
-  // }, [userId, password]);
-
-  // const ex = {
-  //   user_id: 'user1',
-  //   password: user1,
-  // };
 
   const handelSigninSubmit = async (e) => {
     e.preventDefault();
@@ -60,9 +51,10 @@ function SigninForm() {
       });
 
       const user = { ...response.data.user };
-      localStorage.setItem('userInfo', JSON.stringify(user));
+      const userID = { userID : user.id };
+      localStorage.setItem('userInfo', JSON.stringify(userID));
       navigate(`/`);
-      location.reload();
+      window.location.reload();
     } catch {
       alert('로그인 실패. 입력정보가 올바른지 확인하세요');
     }
