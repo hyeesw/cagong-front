@@ -8,7 +8,6 @@ import { API_URL } from '../constants';
 import { PointForm } from '../components';
 import { getCookie } from '../util/cookie';
 
-
 function Point() {
   const userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
   const navigate = useNavigate();
@@ -16,7 +15,6 @@ function Point() {
   const [userName, setUserName] = useState(-1); // 유저 이름
   const [userId, setUserId] = useState(userInfo.userID); // 유저 id
   const [userPoint, setUserPoint] = useState(-1); // 유저 point
-
 
   // 로그인 안한 유저의 경우
   if (userInfo == null) {
@@ -40,18 +38,17 @@ function Point() {
         },
       )
       .then((response) => {
-        setUserName(response.data.username)
-        setUserPoint(response.data.point)
+        setUserName(response.data.username);
+        setUserPoint(response.data.point);
       })
       .catch((err) => {
         console.log('Point.jsx userDB 가져오기 실패 : ', err);
       });
-  }
-  //최소 렌더링시에 1번만 실행됨
-  useEffect(()=>{
-    getUserDB(userInfo.userID)
-  }, [])
-
+  };
+  // 최소 렌더링시에 1번만 실행됨
+  useEffect(() => {
+    getUserDB(userInfo.userID);
+  }, []);
 
   return (
     <>
@@ -66,11 +63,7 @@ function Point() {
         </p>
         <p className="fs-3 fw-bold mb-5">{userPoint}</p>
       </Alert>
-      <PointForm
-        userID={userId}
-        userPoint={userPoint}
-        setUserPoint={setUserPoint}
-      />
+      <PointForm userID={userId} userPoint={userPoint} setUserPoint={setUserPoint} />
     </>
   );
 }
