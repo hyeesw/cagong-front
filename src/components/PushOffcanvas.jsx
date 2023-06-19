@@ -32,7 +32,7 @@ function PushOffcanvas({ showOffcanvas, handleCloseOffcanvas }) {
     }
     const accessToken = getCookie('access_token');
     const result = await axios
-      .put(`${API_URL}getpush/${userInfo.user_id}`, {
+      .put(`${API_URL}getpush/${userInfo.userID}`, {
         headers: { Authorization: `Bearer ${accessToken}` },
       })
       .then((res) => {
